@@ -16,7 +16,12 @@ namespace Assets.Scripts
         {
             var script = inputField.text;
             interp = new LuaInterpreter(script);
-            Debug.Log(interp.Run().String);
+            // Run the entire script
+            //Debug.Log(interp.Run().String);
+            // Passing param to lua function "Test"
+            //Debug.Log(interp.Call("Test", new object[] { "Hello" }));
+            // Running the function called "Test"
+            Debug.Log(interp.Call("Test"));
         }
     }
 }
