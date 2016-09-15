@@ -36,7 +36,7 @@ namespace Assets.Scripts
         /// <returns></returns>
         public DynValue Call(string _func, params object[] _args)
         {
-            var result = _args == null ? script.Call(script.Globals[_func]) : script.Call(script.Globals[_func], _args);
+            var result = script.Call(script.Globals[_func], _args);
             return result;
         }
     }
