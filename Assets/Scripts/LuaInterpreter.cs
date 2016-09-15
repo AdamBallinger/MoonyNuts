@@ -15,7 +15,7 @@ namespace Assets.Scripts
         public LuaInterpreter(string _luaCode)
         {
             script = new Script();
-            script.LoadString(_luaCode);
+            script.DoString(_luaCode);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Assets.Scripts
         /// <param name="_func"></param>
         /// <param name="_args"></param>
         /// <returns></returns>
-        public DynValue Call(string _func, object[] _args = null)
+        public DynValue Call(string _func, params object[] _args)
         {
             var result = _args == null ? script.Call(script.Globals[_func]) : script.Call(script.Globals[_func], _args);
             return result;

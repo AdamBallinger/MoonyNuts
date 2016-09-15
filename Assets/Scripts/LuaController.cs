@@ -21,7 +21,7 @@ namespace Assets.Scripts
             // Passing param to lua function "Test"
             //Debug.Log(interp.Call("Test", new object[] { "Hello" }));
             // Running the function called "Test"
-            Debug.Log(interp.Call("Test"));
+            Debug.Log(interp.Call("Test").String);
         }
     }
 }
