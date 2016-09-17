@@ -17,6 +17,8 @@ namespace Assets.Scripts
 
         public void Start()
         {
+            Script.DefaultOptions.DebugPrint = Debug.Log;
+
             RegisterObjectType(typeof(GameObject));
             RegisterObjectType(typeof(CharacterAPIController));
         }
@@ -24,11 +26,6 @@ namespace Assets.Scripts
         public void OnButtonClick()
         {
             var script = inputField.text;
-
-            // for now, only change the formatting of the script in the interpreters code. 
-            // TODO: Figure out a way to feed this back into the input field without it formatting the already formatted code.
-            script = script.Replace("()", "()" + Environment.NewLine);
-
             interp = new LuaInterpreter(script);
 
             interp.Script.Globals["GetCharacter"] = (Func<int, CharacterAPIController>) CharacterAPI.GetGameObject;

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using MoonSharp.Interpreter;
+﻿using MoonSharp.Interpreter;
 
 namespace Assets.Scripts
 {
@@ -17,7 +16,6 @@ namespace Assets.Scripts
         public LuaInterpreter(string _sourceCode)
         {
             Script = new Script();
-            Script.DefaultOptions.DebugPrint = Debug.Log;
             sourceCode = _sourceCode;
         }
 
