@@ -1,4 +1,5 @@
 ﻿using System;
+using MoonSharp.Interpreter;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +13,6 @@ namespace Assets.Scripts
 
         private LuaInterpreter interp;
 
-        public void Start()
-        {
-            
-        }
-
         public void OnButtonClick()
         {
             var script = inputField.text;
@@ -28,8 +24,17 @@ namespace Assets.Scripts
             // Running the function called "Test"
             //Debug.Log(interp.Call("Test", "Jamie Likes Ducks").String);
             interp.Script.Globals["Test"] = (Action<string>) Test;
-            //interp.BuildScript();
-            //interp.Run();
+            interp.BuildScript();
+            interp.Run();
+        }
+
+        /// <summary>
+        /// Registers a custom object type for use with the LUA interpreter.
+        /// </summary>
+        /// <param name="_type"></param>
+        public void RegisterObjectType(Type _type)
+        {
+            UserData.RegisterType(_type);
         }
 
         private void Test(string _str)

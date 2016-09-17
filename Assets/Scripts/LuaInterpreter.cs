@@ -21,20 +21,11 @@ namespace Assets.Scripts
         }
 
         /// <summary>
-        /// Registers a custom object type for use with the LUA interpreter.
-        /// </summary>
-        /// <param name="_type"></param>
-        public void RegisterObjectType(Type _type)
-        {
-            UserData.RegisterType(_type);
-        }
-
-        /// <summary>
         /// Builds the LUA script. This should be executed after all globals are set for the script.
         /// </summary>
         public void BuildScript()
         {
-            script.LoadString(sourceCode);
+            Script.LoadString(sourceCode);
         }
 
         /// <summary>
@@ -43,7 +34,7 @@ namespace Assets.Scripts
         /// <returns></returns>
         public DynValue Run()
         {
-            var result = script.DoString(sourceCode);
+            var result = Script.DoString(sourceCode);
             return result;
         }
 
@@ -55,7 +46,7 @@ namespace Assets.Scripts
         /// <returns></returns>
         public DynValue Call(string _func, params object[] _args)
         {
-            var result = script.Call(script.Globals[_func], _args);
+            var result = Script.Call(Script.Globals[_func], _args);
             return result;
         }
     }
