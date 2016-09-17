@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts
@@ -11,6 +12,11 @@ namespace Assets.Scripts
 
         private LuaInterpreter interp;
 
+        public void Start()
+        {
+            
+        }
+
         public void OnButtonClick()
         {
             var script = inputField.text;
@@ -21,9 +27,9 @@ namespace Assets.Scripts
             //Debug.Log(interp.Call("Test", new object[] { "Hello" }));
             // Running the function called "Test"
             //Debug.Log(interp.Call("Test", "Jamie Likes Ducks").String);
-            interp.RegisterGlobalsCallback<string>(Test, "Test");
-            interp.BuildScript();
-            interp.Run();
+            interp.Script.Globals["Test"] = (Action<string>) Test;
+            //interp.BuildScript();
+            //interp.Run();
         }
 
         private void Test(string _str)

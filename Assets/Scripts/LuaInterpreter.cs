@@ -7,7 +7,8 @@ namespace Assets.Scripts
     {
 
         private string sourceCode;
-        private Script script;
+
+        public Script Script { get; private set; }
 
         /// <summary>
         /// Create a new lua script instance.
@@ -15,20 +16,8 @@ namespace Assets.Scripts
         /// <param name="_sourceCode">LUA source code for the script.</param>
         public LuaInterpreter(string _sourceCode)
         {
-            script = new Script();
+            Script = new Script();
             sourceCode = _sourceCode;
-        }
-
-        /// <summary>
-        /// Registers a C# callback function when executing a LUA function. E.g. RegisterGlobalsCallback(Example, "ExampleLua") will call the C# Example() method
-        /// when the lua function "ExampleLua" is called in a lua script.
-        /// </summary>
-        /// <typeparam name="T">The optional param types for the callback function</typeparam>
-        /// <param name="callback">The callback method to invoke</param>
-        /// <param name="luaFuncName">The LUA function name that handles executing the given callback function.</param>
-        public void RegisterGlobalsCallback<T>(Action<T> _callback, string _luaFuncName)
-        {
-            script.Globals[_luaFuncName] = _callback;
         }
 
         /// <summary>
