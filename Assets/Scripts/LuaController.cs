@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts
@@ -21,7 +20,15 @@ namespace Assets.Scripts
             // Passing param to lua function "Test"
             //Debug.Log(interp.Call("Test", new object[] { "Hello" }));
             // Running the function called "Test"
-            Debug.Log(interp.Call("Test").String);
+            //Debug.Log(interp.Call("Test", "Jamie Likes Ducks").String);
+            interp.RegisterGlobalsCallback<string>(Test, "Test");
+            interp.BuildScript();
+            interp.Run();
+        }
+
+        private void Test(string _str)
+        {
+            Debug.Log(_str);
         }
     }
 }
