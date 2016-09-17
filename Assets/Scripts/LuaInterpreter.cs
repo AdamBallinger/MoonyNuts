@@ -26,9 +26,9 @@ namespace Assets.Scripts
         /// <typeparam name="T">The optional param types for the callback function</typeparam>
         /// <param name="callback">The callback method to invoke</param>
         /// <param name="luaFuncName">The LUA function name that handles executing the given callback function.</param>
-        public void RegisterGlobalsCallback<T>(Action<T> callback, string luaFuncName)
+        public void RegisterGlobalsCallback<T>(Action<T> _callback, string _luaFuncName)
         {
-            script.Globals[luaFuncName] = callback;
+            script.Globals[_luaFuncName] = _callback;
         }
 
         /// <summary>
