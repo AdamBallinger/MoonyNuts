@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using Assets.Scripts.API;
 using MoonSharp.Interpreter;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,17 +15,24 @@ namespace Assets.Scripts
 
         private LuaInterpreter interp;
 
+        public void Start()
+        {
+            RegisterObjectType(typeof(GameObject));
+            RegisterObjectType(typeof(CharacterAPIController));
+        }
+
         public void OnButtonClick()
         {
             var script = inputField.text;
+
+            // for now, only change the formatting of the script in the interpreters code. 
+            // TODO: Figure out a way to feed this back into the input field without it formatting the already formatted code.
+            script = script.Replace("()", "()" + Environment.NewLine);
+
             interp = new LuaInterpreter(script);
-            // Run the entire script
-            //Debug.Log(interp.Run().String);
-            // Passing param to lua function "Test"
-            //Debug.Log(interp.Call("Test", new object[] { "Hello" }));
-            // Running the function called "Test"
-            //Debug.Log(interp.Call("Test", "Jamie Likes Ducks").String);
-            interp.Script.Globals["Test"] = (Action<string>) Test;
+
+            interp.Script.Globals["GetCharacter"] = (Func<int, CharacterAPIController>) CharacterAPI.GetGameObject;
+            interp.Script.Globals["GetID"] = (Func<GameObject, int>) CharacterAPI.GetID;
             interp.BuildScript();
             interp.Run();
         }
@@ -37,9 +46,9 @@ namespace Assets.Scripts
             UserData.RegisterType(_type);
         }
 
-        private void Test(string _str)
-        {
-            Debug.Log(_str);
-        }
+        //private void Test(string _str)
+        //{
+        //    Debug.Log(_str);
+        //}
     }
 }
