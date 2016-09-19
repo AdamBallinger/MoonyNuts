@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Assets.Scripts.API;
 using MoonSharp.Interpreter;
 using UnityEngine;
@@ -30,7 +29,6 @@ namespace Assets.Scripts
 
             interp.Script.Globals["GetCharacter"] = (Func<int, CharacterAPIController>) CharacterAPI.GetGameObject;
             interp.Script.Globals["GetID"] = (Func<GameObject, int>) CharacterAPI.GetID;
-            interp.BuildScript();
             interp.Run();
         }
 
@@ -47,5 +45,13 @@ namespace Assets.Scripts
         //{
         //    Debug.Log(_str);
         //}
+
+        public void Update()
+        {
+            if (interp != null)
+            {
+                interp.Update();
+            }
+        }
     }
 }

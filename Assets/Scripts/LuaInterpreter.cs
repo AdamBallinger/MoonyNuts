@@ -1,4 +1,5 @@
-﻿using MoonSharp.Interpreter;
+﻿using System.Diagnostics;
+using MoonSharp.Interpreter;
 
 namespace Assets.Scripts
 {
@@ -6,6 +7,8 @@ namespace Assets.Scripts
     {
 
         private string sourceCode;
+
+        private DynValue coroutine;
 
         public Script Script { get; private set; }
 
@@ -20,20 +23,17 @@ namespace Assets.Scripts
         }
 
         /// <summary>
-        /// Builds the LUA script. This should be executed after all globals are set for the script.
-        /// </summary>
-        public void BuildScript()
-        {
-            Script.LoadString(sourceCode);
-        }
-
-        /// <summary>
         /// Runs the script assigned to this interpreter if possible and returns the result.
         /// </summary>
         /// <returns></returns>
         public DynValue Run()
         {
-            var result = Script.DoString(sourceCode);
+            var wrappedCode = @"return function() " + sourceCode +
+                              @"
+                                end";
+            var result = Script.DoString(wrappedCode);
+            coroutine = Script.CreateCoroutine(result);
+            coroutine.Coroutine.AutoYieldCounter = 10;
             return result;
         }
 
@@ -47,6 +47,11 @@ namespace Assets.Scripts
         {
             var result = Script.Call(Script.Globals[_func], _args);
             return result;
+        }
+
+        public void Update()
+        {
+            coroutine.Coroutine.Resume();
         }
     }
 }

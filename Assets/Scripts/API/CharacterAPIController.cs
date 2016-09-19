@@ -31,6 +31,14 @@ namespace Assets.Scripts.API
             if ((Vector2)transform.position != targetPosition)
             {
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                if (targetPosition.x > transform.position.x)
+                {
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
             }
             else
             {
@@ -42,9 +50,15 @@ namespace Assets.Scripts.API
             }
         }
 
+        public void Speak()
+        {
+            GetComponent<AudioSource>().Play();
+        }
+
         public void MoveLeft()
         {
             functions.Add(Left);
+            //Left();
         }
 
         private void Left()
@@ -55,6 +69,7 @@ namespace Assets.Scripts.API
         public void MoveRight()
         {
             functions.Add(Right);
+            //Right();
         }
 
         private void Right()
@@ -65,6 +80,7 @@ namespace Assets.Scripts.API
         public void MoveUp()
         {
             functions.Add(Up);
+            //Up();
         }
 
         private void Up()
@@ -75,6 +91,7 @@ namespace Assets.Scripts.API
         public void MoveDown()
         {
             functions.Add(Down);
+            //Down();
         }
 
         private void Down()
