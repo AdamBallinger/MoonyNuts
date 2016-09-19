@@ -47,6 +47,10 @@ namespace Assets.Scripts.API
                     functions[0]();
                     functions.RemoveAt(0);
                 }
+                else
+                {
+                    LuaInterpreter.Current.Resume();
+                }
             }
         }
 
@@ -58,7 +62,6 @@ namespace Assets.Scripts.API
         public void MoveLeft()
         {
             functions.Add(Left);
-            //Left();
         }
 
         private void Left()
@@ -69,7 +72,6 @@ namespace Assets.Scripts.API
         public void MoveRight()
         {
             functions.Add(Right);
-            //Right();
         }
 
         private void Right()
@@ -80,7 +82,6 @@ namespace Assets.Scripts.API
         public void MoveUp()
         {
             functions.Add(Up);
-            //Up();
         }
 
         private void Up()
@@ -91,7 +92,6 @@ namespace Assets.Scripts.API
         public void MoveDown()
         {
             functions.Add(Down);
-            //Down();
         }
 
         private void Down()

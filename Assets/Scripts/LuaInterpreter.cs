@@ -1,10 +1,12 @@
-﻿using System.Diagnostics;
-using MoonSharp.Interpreter;
+﻿using MoonSharp.Interpreter;
+using UnityEngine.Assertions.Must;
 
 namespace Assets.Scripts
 {
     public class LuaInterpreter
     {
+
+        public static LuaInterpreter Current { get; private set; }
 
         private string sourceCode;
 
@@ -12,14 +14,20 @@ namespace Assets.Scripts
 
         public Script Script { get; private set; }
 
+
+        public static void Create()
+        {
+            Current = new LuaInterpreter();
+            Current.Script = new Script();
+        }
+
         /// <summary>
         /// Create a new lua script instance.
         /// </summary>
         /// <param name="_sourceCode">LUA source code for the script.</param>
-        public LuaInterpreter(string _sourceCode)
+        public void SetSourceCode(string _sourceCode)
         {
-            Script = new Script();
-            sourceCode = _sourceCode;
+            Current.sourceCode = _sourceCode;
         }
 
         /// <summary>
@@ -28,12 +36,12 @@ namespace Assets.Scripts
         /// <returns></returns>
         public DynValue Run()
         {
-            var wrappedCode = @"return function() " + sourceCode +
+            var wrappedCode = @"return function() " + Current.sourceCode +
                               @"
                                 end";
-            var result = Script.DoString(wrappedCode);
-            coroutine = Script.CreateCoroutine(result);
-            coroutine.Coroutine.AutoYieldCounter = 10;
+            var result = Current.Script.DoString(wrappedCode);
+            Current.coroutine = Current.Script.CreateCoroutine(result);
+            Current.coroutine.Coroutine.AutoYieldCounter = 10;
             return result;
         }
 
@@ -49,9 +57,20 @@ namespace Assets.Scripts
             return result;
         }
 
-        public void Update()
+        public void Terminate()
         {
-            coroutine.Coroutine.Resume();
+            if (Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
+            {
+                // TODO: Kill the thing and reset the scene.
+            }
+        }
+
+        public void Resume()
+        {
+            if(Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
+            {
+                Current.coroutine.Coroutine.Resume();
+            }
         }
     }
 }

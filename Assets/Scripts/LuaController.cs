@@ -12,11 +12,10 @@ namespace Assets.Scripts
         public Button runButton;
         public InputField inputField;
 
-        private LuaInterpreter interp;
-
         public void Start()
         {
             Script.DefaultOptions.DebugPrint = Debug.Log;
+            LuaInterpreter.Create();
 
             RegisterObjectType(typeof(GameObject));
             RegisterObjectType(typeof(CharacterAPIController));
@@ -25,11 +24,11 @@ namespace Assets.Scripts
         public void OnButtonClick()
         {
             var script = inputField.text;
-            interp = new LuaInterpreter(script);
-
-            interp.Script.Globals["GetCharacter"] = (Func<int, CharacterAPIController>) CharacterAPI.GetGameObject;
-            interp.Script.Globals["GetID"] = (Func<GameObject, int>) CharacterAPI.GetID;
-            interp.Run();
+            LuaInterpreter.Current.SetSourceCode(script);
+            
+            LuaInterpreter.Current.Script.Globals["GetCharacter"] = (Func<int, CharacterAPIController>) CharacterAPI.GetGameObject;
+            LuaInterpreter.Current.Script.Globals["GetCharacterID"] = (Func<GameObject, int>) CharacterAPI.GetID;
+            LuaInterpreter.Current.Run();
         }
 
         /// <summary>
@@ -39,19 +38,6 @@ namespace Assets.Scripts
         public void RegisterObjectType(Type _type)
         {
             UserData.RegisterType(_type);
-        }
-
-        //private void Test(string _str)
-        //{
-        //    Debug.Log(_str);
-        //}
-
-        public void Update()
-        {
-            if (interp != null)
-            {
-                interp.Update();
-            }
         }
     }
 }
