@@ -26,7 +26,7 @@ namespace Assets.Scripts
         /// <summary>
         /// Event triggered when the "Run Script" button is clicked. Sets the LUA globals and runs the LUA code in the script box.
         /// </summary>
-        public void OnButtonClick()
+        public void OnButtonClickRunScript()
         {
             var script = inputField.text;
             LuaInterpreter.Current.SetSourceCode(script);
@@ -37,6 +37,11 @@ namespace Assets.Scripts
             LuaInterpreter.Current.Script.Globals["duck"] = CharacterAPI.GetGameObject(0);
 
             LuaInterpreter.Current.Run();
+        }
+
+        public void OnButtonClickStopScript()
+        {
+            LuaInterpreter.Current.Terminate();
         }
 
         /// <summary>
