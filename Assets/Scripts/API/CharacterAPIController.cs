@@ -49,32 +49,48 @@ namespace Assets.Scripts.API
                 }
                 else
                 {
+                    // Resume the LUA coroutine if no functions left in the list.
                     LuaInterpreter.Current.Resume();
                 }
             }
         }
 
+        /// <summary>
+        /// API call to make the character speak.
+        /// </summary>
         public void Speak()
         {
             // Lambda
             functions.Add(() => GetComponent<AudioSource>().Play());
         }
 
+        /// <summary>
+        /// API call to make the character move left by the specified step distance.
+        /// </summary>
         public void MoveLeft()
         {
             functions.Add(() => targetPosition.x -= stepDistance);
         }
 
+        /// <summary>
+        /// API call to make the character move right by the specified step distance.
+        /// </summary>
         public void MoveRight()
         {
             functions.Add(() => targetPosition.x += stepDistance);
         }
 
+        /// <summary>
+        /// API call to make the character move up by the specified step distance.
+        /// </summary>
         public void MoveUp()
         {
             functions.Add(() => targetPosition.y += stepDistance);
         }
 
+        /// <summary>
+        /// API call to make the character move down by the specified step distance.
+        /// </summary>
         public void MoveDown()
         {
             functions.Add(() => targetPosition.y -= stepDistance);

@@ -14,21 +14,28 @@ namespace Assets.Scripts
 
         public void Start()
         {
+            // Set the LUA print function to use the Unity Debug.Log function.
             Script.DefaultOptions.DebugPrint = Debug.Log;
             LuaInterpreter.Create();
 
+            // Register types for the LUA interpreter to understand and use.
             RegisterObjectType(typeof(GameObject));
             RegisterObjectType(typeof(CharacterAPIController));
         }
 
+        /// <summary>
+        /// Event triggered when the "Run Script" button is clicked. Sets the LUA globals and runs the LUA code in the script box.
+        /// </summary>
         public void OnButtonClick()
         {
             var script = inputField.text;
             LuaInterpreter.Current.SetSourceCode(script);
             
+            // Set the globals for the interpreter.
             LuaInterpreter.Current.Script.Globals["GetCharacter"] = (Func<int, CharacterAPIController>) CharacterAPI.GetGameObject;
             LuaInterpreter.Current.Script.Globals["GetCharacterID"] = (Func<GameObject, int>) CharacterAPI.GetID;
             LuaInterpreter.Current.Script.Globals["duck"] = CharacterAPI.GetGameObject(0);
+
             LuaInterpreter.Current.Run();
         }
 

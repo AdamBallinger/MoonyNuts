@@ -14,7 +14,9 @@ namespace Assets.Scripts
 
         public Script Script { get; private set; }
 
-
+        /// <summary>
+        /// Creates a new LUA interpreter instance.
+        /// </summary>
         public static void Create()
         {
             Current = new LuaInterpreter();
@@ -57,6 +59,9 @@ namespace Assets.Scripts
             return result;
         }
 
+        /// <summary>
+        /// Terminates the current LUA interpreter execution.
+        /// </summary>
         public void Terminate()
         {
             if (Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
@@ -65,6 +70,10 @@ namespace Assets.Scripts
             }
         }
 
+        /// <summary>
+        /// Resumes the LUA coroutine if it is not yet dead. This will resume the LUA script execution for things like while true loops etc. and not
+        /// lock the unity thread.
+        /// </summary>
         public void Resume()
         {
             if(Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
