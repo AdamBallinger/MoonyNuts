@@ -62,42 +62,22 @@ namespace Assets.Scripts.API
 
         public void MoveLeft()
         {
-            functions.Add(Left);
-        }
-
-        private void Left()
-        {
-            targetPosition.x -= stepDistance;
+            functions.Add(() => targetPosition.x -= stepDistance);
         }
 
         public void MoveRight()
         {
-            functions.Add(Right);
-        }
-
-        private void Right()
-        {
-            targetPosition.x += stepDistance;
+            functions.Add(() => targetPosition.x += stepDistance);
         }
 
         public void MoveUp()
         {
-            functions.Add(Up);
-        }
-
-        private void Up()
-        {
-            targetPosition.y += stepDistance;
+            functions.Add(() => targetPosition.y += stepDistance);
         }
 
         public void MoveDown()
         {
-            functions.Add(Down);
-        }
-
-        private void Down()
-        {
-            targetPosition.y -= stepDistance;
+            functions.Add(() => targetPosition.y -= stepDistance);
         }
     }
 }
