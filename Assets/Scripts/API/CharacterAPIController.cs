@@ -56,7 +56,8 @@ namespace Assets.Scripts.API
 
         public void Speak()
         {
-            GetComponent<AudioSource>().Play();
+            // Lambda
+            functions.Add(() => GetComponent<AudioSource>().Play());
         }
 
         public void MoveLeft()
