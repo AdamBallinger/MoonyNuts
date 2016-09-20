@@ -23,22 +23,12 @@ namespace Assets.Scripts.API
             targetPosition = transform.position;
         }
 
-        /// <summary>
-        /// Always updating logic loop
-        /// </summary>
         public void Update()
         {
             if ((Vector2)transform.position != targetPosition)
             {
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-                if (targetPosition.x > transform.position.x)
-                {
-                    GetComponent<SpriteRenderer>().flipX = true;
-                }
-                else
-                {
-                    GetComponent<SpriteRenderer>().flipX = false;
-                }
+                GetComponent<SpriteRenderer>().flipX = targetPosition.x > transform.position.x;
             }
             else
             {

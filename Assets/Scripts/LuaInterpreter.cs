@@ -43,7 +43,7 @@ namespace Assets.Scripts
                                 end";
             var result = Current.Script.DoString(wrappedCode);
             Current.coroutine = Current.Script.CreateCoroutine(result);
-            Current.coroutine.Coroutine.AutoYieldCounter = 10;
+            Current.coroutine.Coroutine.AutoYieldCounter = 100;
             return result;
         }
 
