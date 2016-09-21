@@ -66,7 +66,8 @@ namespace Assets.Scripts
         {
             if (Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
             {
-                // TODO: Kill the thing and reset the scene.
+                // Recreate the interpreter instance to kill LUA execution
+                Create();
             }
         }
 
