@@ -44,6 +44,7 @@ end";
         public void OnButtonClickRunScript()
         {
             var script = inputField.text;
+            LuaInterpreter.Create();
             LuaInterpreter.Current.SetSourceCode(script);
             
             // Set the globals for the interpreter.
