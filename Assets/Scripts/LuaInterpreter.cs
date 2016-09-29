@@ -77,7 +77,7 @@ namespace Assets.Scripts
         /// </summary>
         public void Resume()
         {
-            if(Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
+            if (Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
             {
                 Current.coroutine.Coroutine.Resume();
             }

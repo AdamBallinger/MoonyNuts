@@ -82,8 +82,17 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WebGL.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.OSXStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
@@ -91,11 +100,11 @@
     <Reference Include="MoonSharp.Interpreter">
       <HintPath>Assets\Libraries\MoonSharp.Interpreter.dll</HintPath>
     </Reference>
-    <Reference Include="tk2dSkin">
-      <HintPath>Assets\TK2DROOT\tk2d\Editor\tk2dSkin.dll</HintPath>
-    </Reference>
     <Reference Include="tk2dExternal">
       <HintPath>Assets\TK2DROOT\tk2d\Editor\tk2dExternal.dll</HintPath>
+    </Reference>
+    <Reference Include="tk2dSkin">
+      <HintPath>Assets\TK2DROOT\tk2d\Editor\tk2dSkin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +171,42 @@
     <Compile Include="Assets\TK2DROOT\tk2d\Editor\tk2dSpriteGuiUtility.cs" />
     <Compile Include="Assets\TK2DROOT\tk2d\Editor\tk2dUndo.cs" />
     <Compile Include="Assets\TK2DROOT\tk2d\Editor\tk2dUpdateWindow.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\Importer\tk2dTileMapImporter.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapBrushBuilder.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapBrushRenderer.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapEditorData.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapEditorDataInspector.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapSceneGUI.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapScratchpad.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapToolbar.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dTileMap\Editor\tk2dTileMapUtility.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIBaseItemControlEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIControlsHelperEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUICustomEditorGUILayout.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIDragItemEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIDropDownMenuEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIHoverItemEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIMultiStateToggleButtonEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIProgressBarEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIScrollableAreaEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIScrollbarEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUISoundItemEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUITextInputEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIToggleButtonEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIToggleButtonGroupEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIToggleControlEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUITweenItemEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIUpDownButtonEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Controls\tk2dUIUpDownHoverButtonEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUIItemBoundsHelper.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUIItemEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUILayoutContainerEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUILayoutContainerSizerEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUILayoutEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUIMaskEditor.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUIMethodBindingHelper.cs" />
+    <Compile Include="Assets\TK2DROOT\tk2dUI\Editor\Core\tk2dUISpriteAnimatorEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TK2DROOT\tk2d\Editor\EditorUtility.shader" />
@@ -177,6 +222,15 @@
     <None Include="Assets\TK2DROOT\tk2d\Shaders\SolidVertexColor.shader" />
     <None Include="Assets\TK2DROOT\tk2d\Shaders\goodies\PackedTextMesh.shader" />
     <None Include="Assets\TK2DROOT\tk2d\Shaders\resources\BlendVertexColor.shader" />
+    <None Include="Assets\TK2DROOT\tk2dUI\Shaders\DepthMask.shader" />
+    <None Include="Assets\TK2DROOT\tk2dUI\Shaders\DepthMaskSolid.shader" />
+    <None Include="Assets\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito16.fnt" />
+    <None Include="Assets\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
+    <None Include="Assets\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito32.fnt" />
+    <None Include="Assets\TK2DROOT\tk2dUI_demo\Assets\Font\OldSansBlack\OldSansBlack.fnt" />
+    <None Include="Assets\TK2DROOT\tk2d_demo\Credits.txt" />
+    <None Include="Assets\TK2DROOT\tk2d_demo\demobmfont\test.fnt" />
+    <None Include="Assets\TK2DROOT\tk2d_demo\democameradata\source\democamerafont.fnt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

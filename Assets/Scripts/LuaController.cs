@@ -60,6 +60,12 @@ end";
             LuaInterpreter.Current.Terminate();
         }
 
+        public void OnButtonClickCloseApplication()
+        {
+            LuaInterpreter.Current.Terminate();
+            Application.Quit();
+        }
+
         /// <summary>
         /// Registers a custom object type for use with the LUA interpreter.
         /// </summary>
