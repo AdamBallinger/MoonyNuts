@@ -50,7 +50,6 @@ namespace Assets.Scripts.API
         /// </summary>
         public void OnInterpreterTerminated()
         {
-            Debug.Log("Clearing");
             functions.Clear();
         }
 
