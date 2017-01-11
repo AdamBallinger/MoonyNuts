@@ -54,5 +54,10 @@ namespace Assets.Scripts.API
 
             return objects[_id].GetComponent<CharacterAPIController>();
         }
+
+        public static List<GameObject> GetObjects()
+        {
+            return objects;
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace Assets.Scripts
 
         public Button runButton;
         public InputField inputField;
+        public InputField errorOutput;
 
         public void Start()
         {
@@ -52,7 +53,8 @@ end";
             LuaInterpreter.Current.Script.Globals["GetCharacterID"] = (Func<GameObject, int>) CharacterAPI.GetID;
             LuaInterpreter.Current.Script.Globals["duck"] = CharacterAPI.GetGameObject(0);
 
-            LuaInterpreter.Current.Run();
+            var scriptResult = LuaInterpreter.Current.Run();
+            errorOutput.text = scriptResult;
         }
 
         public void OnButtonClickStopScript()

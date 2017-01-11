@@ -46,6 +46,15 @@ namespace Assets.Scripts.API
         }
 
         /// <summary>
+        /// Called when the LUA interpreter is terminated.
+        /// </summary>
+        public void OnInterpreterTerminated()
+        {
+            Debug.Log("Clearing");
+            functions.Clear();
+        }
+
+        /// <summary>
         /// API call to make the character speak.
         /// </summary>
         public void Speak()

@@ -1,5 +1,7 @@
-﻿using MoonSharp.Interpreter;
-using UnityEngine.Assertions.Must;
+﻿using System;
+using Assets.Scripts.API;
+using MoonSharp.Interpreter;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -33,37 +35,54 @@ namespace Assets.Scripts
         }
 
         /// <summary>
-        /// Runs the script assigned to this interpreter if possible and returns the result.
+        /// Runs the script assigned to this interpreter if possible and returns the string result.
         /// </summary>
         /// <returns></returns>
-        public DynValue Run()
+        public string Run()
         {
-            var wrappedCode = @"return function() " + Current.sourceCode +
+            var wrappedCode = @"return function() "
+                              + Current.sourceCode +
                               @"
                                 end";
-            var result = Current.Script.DoString(wrappedCode);
-            Current.coroutine = Current.Script.CreateCoroutine(result);
-            Current.coroutine.Coroutine.AutoYieldCounter = 100;
-            return result;
+
+            try
+            {
+                var dynRes = Current.Script.DoString(wrappedCode);
+                Current.coroutine = Current.Script.CreateCoroutine(dynRes);
+                Current.coroutine.Coroutine.AutoYieldCounter = 100;
+            }
+            catch (InterpreterException exception)
+            {
+                Debug.LogWarning("LUA ERROR");
+                Terminate();
+                return exception.DecoratedMessage;
+            }
+
+            return "Code check: OK";
         }
 
-        /// <summary>
-        /// Call a specific function within the interpreters attatched script with optional parameters
-        /// </summary>
-        /// <param name="_func"></param>
-        /// <param name="_args"></param>
-        /// <returns></returns>
-        public DynValue Call(string _func, params object[] _args)
-        {
-            var result = Script.Call(Script.Globals[_func], _args);
-            return result;
-        }
+        ///// <summary>
+        ///// Call a specific function within the interpreters attatched script with optional parameters
+        ///// </summary>
+        ///// <param name="_func"></param>
+        ///// <param name="_args"></param>
+        ///// <returns></returns>
+        //public DynValue Call(string _func, params object[] _args)
+        //{
+        //    var result = Script.Call(Script.Globals[_func], _args);
+        //    return result;
+        //}
 
         /// <summary>
         /// Terminates the current LUA interpreter execution.
         /// </summary>
         public void Terminate()
         {
+            foreach (var obj in CharacterAPI.GetObjects())
+            {
+                obj.SendMessage("OnInterpreterTerminated", SendMessageOptions.DontRequireReceiver);
+            }
+
             if (Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
             {
                 // Recreate the interpreter instance to kill LUA execution
@@ -79,7 +98,15 @@ namespace Assets.Scripts
         {
             if (Current.coroutine != null && Current.coroutine.Coroutine.State != CoroutineState.Dead)
             {
-                Current.coroutine.Coroutine.Resume();
+                try
+                {
+                    Current.coroutine.Coroutine.Resume();
+                }
+                catch (Exception exception)
+                {
+                    Terminate();
+                    UnityEngine.Object.FindObjectOfType<LuaController>().errorOutput.text = exception.Message;
+                }
             }
         }
     }
