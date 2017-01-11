@@ -102,10 +102,10 @@ namespace Assets.Scripts
                 {
                     Current.coroutine.Coroutine.Resume();
                 }
-                catch (Exception exception)
+                catch (ScriptRuntimeException exception)
                 {
                     Terminate();
-                    UnityEngine.Object.FindObjectOfType<LuaController>().errorOutput.text = exception.Message;
+                    UnityEngine.Object.FindObjectOfType<LuaController>().errorOutput.text = exception.DecoratedMessage;
                 }
             }
         }
