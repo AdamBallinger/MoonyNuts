@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -67,6 +70,9 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
@@ -80,6 +86,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\API\CharacterAPI.cs" />
     <Compile Include="Assets\Scripts\API\CharacterAPIController.cs" />
+    <Compile Include="Assets\Scripts\Game\Tile.cs" />
+    <Compile Include="Assets\Scripts\Game\World.cs" />
+    <Compile Include="Assets\Scripts\Game\WorldController.cs" />
     <Compile Include="Assets\Scripts\LuaController.cs" />
     <Compile Include="Assets\Scripts\LuaInterpreter.cs" />
   </ItemGroup>

@@ -32,7 +32,8 @@ d2.MoveUp()
 d2.Speak()
 d2.MoveLeft()
 d2.MoveDown()
-end";
+end
+";
 
             // Register types for the LUA interpreter to understand and use.
             RegisterObjectType(typeof(GameObject));
