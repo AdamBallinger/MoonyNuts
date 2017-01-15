@@ -1,5 +1,4 @@
-﻿
-using Boo.Lang;
+﻿using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Game
@@ -13,6 +12,8 @@ namespace Assets.Scripts.Game
         public int Height { get; private set; }
 
         private Tile[,] Tiles { get; set; }
+
+        public Action OnWorldModifyFinishCallback;
 
         private World() { }
 
@@ -57,6 +58,9 @@ namespace Assets.Scripts.Game
                     Current.Tiles[x, y].Type = TileType.Empty;
                 }
             }
+
+            if (OnWorldModifyFinishCallback != null)
+                OnWorldModifyFinishCallback();
         }
 
         /// <summary>
@@ -76,7 +80,7 @@ namespace Assets.Scripts.Game
         /// <returns></returns>
         public Tile GetTileAt(int _x, int _y)
         {
-            if(_x < 0 || _x > Current.Width || _y < 0 || _y > Current.Height)
+            if(_x < 0 || _x >= Current.Width || _y < 0 || _y >= Current.Height)
             {
                 return null;
             }
@@ -106,6 +110,11 @@ namespace Assets.Scripts.Game
             var x = Mathf.FloorToInt(_coord.x + 0.5f);
             var y = Mathf.FloorToInt(_coord.y + 0.5f);
             return new Vector2(x, y);
+        }
+
+        public void RegisterWorldModifyCallback(Action _callback)
+        {
+            OnWorldModifyFinishCallback += _callback;
         }
     }
 }

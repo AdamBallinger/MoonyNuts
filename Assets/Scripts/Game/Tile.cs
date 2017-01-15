@@ -1,12 +1,36 @@
 ﻿
 using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
     public enum TileType
     {
+        Nothing,
         Empty,
         Wall
+    }
+
+    [Flags]
+    public enum AdjacentFlag
+    {
+        None = 1,
+        Left = 1 << 1,
+        Right = 1 << 2,
+        Up = 1 << 3,
+        Down = 1 << 4,
+
+        All = Left | Right | Up | Down,
+        LeftRight = Left | Right,
+        UpDown = Up | Down,
+        UpLeft = Up | Left,
+        UpRight = Up | Right,
+        DownLeft = Down | Left,
+        DownRight = Down | Right,
+        UpLeftDown = UpLeft | Down,
+        UpRightDown = UpRight | Down,
+        DownLeftRight = Down | LeftRight,
+        UpLeftRight = Up | LeftRight
     }
 
     public class Tile
@@ -15,10 +39,14 @@ namespace Assets.Scripts.Game
         public int X { get; private set; }
         public int Y { get; private set; }
 
+        public Sprite TileSprite { get; set; }
+
+        private AdjacentFlag Adjacent { get; set; }
+
         private Action<Tile> typeChangeCallback;
 
         private TileType type;
-        private TileType oldType;
+        private TileType oldType = TileType.Nothing;
         public TileType Type
         {
             get { return type; }
@@ -31,12 +59,10 @@ namespace Assets.Scripts.Game
             }
         }
 
-        public Tile(int _x, int _y, TileType _type = TileType.Empty)
+        public Tile(int _x, int _y)
         {
             X = _x;
             Y = _y;
-            Type = _type;
-            oldType = Type;
         }
 
         /// <summary>
@@ -46,6 +72,30 @@ namespace Assets.Scripts.Game
         public void RegisterTileTypeChangeCallback(Action<Tile> _callback)
         {
             typeChangeCallback += _callback;
+        }
+
+        public bool HasAdjacentFlags(AdjacentFlag _flag)
+        {
+            return (Adjacent & _flag) == _flag;
+        }
+
+        public void SetAdjacent(AdjacentFlag _flag)
+        {
+            Adjacent = _flag;
+        }
+
+        public void AddAdjacentFlag(AdjacentFlag _flag)
+        {
+            Adjacent &= ~AdjacentFlag.None;
+            Adjacent |= _flag;
+        }
+
+        public void CheckAdjacent(Tile _tile, AdjacentFlag _direction)
+        {
+            if(_tile == null || _tile.Type == TileType.Empty)
+            {
+                AddAdjacentFlag(_direction);
+            }
         }
     }
 }
