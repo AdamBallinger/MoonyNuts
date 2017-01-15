@@ -58,13 +58,23 @@ namespace Assets.Scripts.Game
                 for (var y = 0; y < worldHeight; y++)
                 {
                     var tile = World.Current.GetTileAt(x, y);
-                    var tileLeft = World.Current.GetTileAt(x - 1, y);
-                    var tileRight = World.Current.GetTileAt(x + 1, y);
-                    var tileUp = World.Current.GetTileAt(x, y + 1);
-                    var tileDown = World.Current.GetTileAt(x, y - 1);
 
-                    // Set sprite based on surrounding tile types.
-                    SetWallSpritesFromAdjacent(tile, tileRight, tileLeft, tileUp, tileDown);
+                    switch (tile.Type)
+                    {
+                        case TileType.Nothing:
+                        case TileType.Empty:
+                            continue;
+
+                        case TileType.Wall:
+                            var tileLeft = World.Current.GetTileAt(x - 1, y);
+                            var tileRight = World.Current.GetTileAt(x + 1, y);
+                            var tileUp = World.Current.GetTileAt(x, y + 1);
+                            var tileDown = World.Current.GetTileAt(x, y - 1);
+
+                            // Set sprite based on surrounding tile types.
+                            SetWallSpritesFromAdjacent(tile, tileRight, tileLeft, tileUp, tileDown);
+                            break;
+                    }
                 }
             }
         }

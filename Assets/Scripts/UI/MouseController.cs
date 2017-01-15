@@ -19,6 +19,7 @@ namespace Assets.Scripts.UI
         public float maxZoomOut = 5.0f;
 
         public SelectionMode SelectMode { get; set; }
+        public TileType BuildTileType { get; set; }
 
         private Vector2 currentMousePosition;
         private Vector2 lastMousePosition;
@@ -48,7 +49,7 @@ namespace Assets.Scripts.UI
             if (mouseDragging) return;
 
             var tileHovered = World.Current.GetTileAtWorldCoord(currentMousePosition);
-            if(tileHovered != null)
+            if (tileHovered != null)
             {
                 mouseCursor.SetActive(true);
                 mouseCursor.transform.position = new Vector2(tileHovered.X, tileHovered.Y);
@@ -63,13 +64,13 @@ namespace Assets.Scripts.UI
         {
             var isMouseOnUI = EventSystem.current.IsPointerOverGameObject();
 
-            if(Input.GetMouseButtonDown(0) && !isMouseOnUI)
+            if (Input.GetMouseButtonDown(0) && !isMouseOnUI)
             {
                 mouseDragging = true;
                 mouseDragStartPosition = currentMousePosition;
             }
 
-            if(mouseDragging)
+            if (mouseDragging)
             {
                 // Add 0.5f to compensate for Unity gameobjects pivot points being the center of the object.
                 var startX = Mathf.FloorToInt(mouseDragStartPosition.x + 0.5f);
@@ -149,7 +150,32 @@ namespace Assets.Scripts.UI
 
         private void ProcessTileSelected(Tile _tile)
         {
-            
+            switch (SelectMode)
+            {
+                case SelectionMode.None:
+                    break;
+
+                case SelectionMode.Build:
+                    HandleBuildMode(_tile);
+                    break;
+            }
+        }
+
+        private void HandleBuildMode(Tile _tile)
+        {
+            switch (BuildTileType)
+            {
+                case TileType.Nothing:
+                    break;
+
+                case TileType.Empty:
+                    // TODO: Clear tile. Tiles will also need to have any colliders etc removed if they exist.
+                    break;
+
+                case TileType.Wall:
+                    // TODO: Build wall. Tiles will need colliders etc added.
+                    break;
+            }
         }
     }
 }
