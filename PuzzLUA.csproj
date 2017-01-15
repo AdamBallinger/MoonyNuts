@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\API\CharacterAPI.cs" />
     <Compile Include="Assets\Scripts\API\CharacterAPIController.cs" />
     <Compile Include="Assets\Scripts\Game\Directories.cs" />
+    <Compile Include="Assets\Scripts\Game\GameLogicController.cs" />
     <Compile Include="Assets\Scripts\Game\Tile.cs" />
     <Compile Include="Assets\Scripts\Game\World.cs" />
     <Compile Include="Assets\Scripts\Game\WorldController.cs" />

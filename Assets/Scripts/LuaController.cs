@@ -35,7 +35,19 @@ namespace Assets.Scripts
 //end
 //";
 
-            inputField.text = @"sq = GetCharacter(1)";
+            inputField.text = @"sq = GetCharacter(1)
+for i=0, 4 do
+    sq.MoveUp()
+end
+
+for i=0, 2 do
+    sq.MoveRight()
+end
+
+for i=0, 4 do
+    sq.MoveDown()
+end
+sq.MoveRight()";
 
             // Register types for the LUA interpreter to understand and use.
             RegisterObjectType(typeof(GameObject));

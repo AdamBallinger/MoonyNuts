@@ -13,7 +13,7 @@ namespace Assets.Scripts.Game
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public string WorldName { get; private set; }
+        public string WorldName { get; set; }
 
         public Tile[,] Tiles { get; private set; }
 
@@ -143,82 +143,82 @@ namespace Assets.Scripts.Game
             OnWorldModifyFinishCallback += _callback;
         }
 
-        public void Save()
-        {
-            var xmlSettings = new XmlWriterSettings();
-            xmlSettings.Indent = true;
-            xmlSettings.IndentChars = "    ";
-            xmlSettings.NewLineOnAttributes = false;
+        //public void Save()
+        //{
+        //    var xmlSettings = new XmlWriterSettings();
+        //    xmlSettings.Indent = true;
+        //    xmlSettings.IndentChars = "    ";
+        //    xmlSettings.NewLineOnAttributes = false;
 
-            var saveFile = Path.Combine(Directories.Save_Directory, WorldName + ".xml");
+        //    var saveFile = Path.Combine(Directories.Save_Directory, WorldName + ".xml");
 
-            using (var xmlWriter = XmlWriter.Create(saveFile, xmlSettings))
-            {
-                xmlWriter.WriteStartDocument();
+        //    using (var xmlWriter = XmlWriter.Create(saveFile, xmlSettings))
+        //    {
+        //        xmlWriter.WriteStartDocument();
 
-                xmlWriter.WriteStartElement("LevelSaveFile");
-                xmlWriter.WriteStartElement("LevelData");
+        //        xmlWriter.WriteStartElement("LevelSaveFile");
+        //        xmlWriter.WriteStartElement("LevelData");
 
-                xmlWriter.WriteAttributeString("WorldName", WorldName);
-                xmlWriter.WriteAttributeString("WorldWidth", Width.ToString());
-                xmlWriter.WriteAttributeString("WorldHeight", Height.ToString());
+        //        xmlWriter.WriteAttributeString("WorldName", WorldName);
+        //        xmlWriter.WriteAttributeString("WorldWidth", Width.ToString());
+        //        xmlWriter.WriteAttributeString("WorldHeight", Height.ToString());
 
-                xmlWriter.WriteStartElement("WorldTiles");
+        //        xmlWriter.WriteStartElement("WorldTiles");
 
-                for(var x = 0; x < Width; x++)
-                {
-                    for(var y = 0; y < Height; y++)
-                    {
-                        var tile = Tiles[x, y];
-                        if(tile.Type == TileType.Empty) continue;
+        //        for(var x = 0; x < Width; x++)
+        //        {
+        //            for(var y = 0; y < Height; y++)
+        //            {
+        //                var tile = Tiles[x, y];
+        //                if(tile.Type == TileType.Empty) continue;
                         
-                        xmlWriter.WriteStartElement("Tile");
-                        xmlWriter.WriteAttributeString("TileType", tile.Type.ToString());
-                        xmlWriter.WriteAttributeString("TileX", tile.X.ToString());
-                        xmlWriter.WriteAttributeString("TileY", tile.Y.ToString());
-                        xmlWriter.WriteEndElement();
-                    }
-                }
+        //                xmlWriter.WriteStartElement("Tile");
+        //                xmlWriter.WriteAttributeString("TileType", tile.Type.ToString());
+        //                xmlWriter.WriteAttributeString("TileX", tile.X.ToString());
+        //                xmlWriter.WriteAttributeString("TileY", tile.Y.ToString());
+        //                xmlWriter.WriteEndElement();
+        //            }
+        //        }
 
-                xmlWriter.WriteEndElement(); // end WorldTiles element
+        //        xmlWriter.WriteEndElement(); // end WorldTiles element
 
-                xmlWriter.WriteEndElement(); // end LevelData element
-                xmlWriter.WriteEndElement(); // end LevelSaveFile element
+        //        xmlWriter.WriteEndElement(); // end LevelData element
+        //        xmlWriter.WriteEndElement(); // end LevelSaveFile element
 
-                xmlWriter.WriteEndDocument(); // end xml doc
-            }
-        }
+        //        xmlWriter.WriteEndDocument(); // end xml doc
+        //    }
+        //}
 
-        public void Load(string _worldName)
-        {
-            Current.WorldName = _worldName;
-            var loadFile = Path.Combine(Directories.Save_Directory, _worldName + ".xml");
-            Current.Clear();
+        //public void Load(string _worldName)
+        //{
+        //    Current.WorldName = _worldName;
+        //    var loadFile = Path.Combine(Directories.Save_Directory, _worldName + ".xml");
+        //    Current.Clear();
 
-            Debug.Log("Loading: " + loadFile);
+        //    Debug.Log("Loading: " + loadFile);
 
-            using (var xmlReader = XmlReader.Create(loadFile))
-            {
-                while(xmlReader.Read())
-                {
-                    if(xmlReader.IsStartElement())
-                    {
-                        switch (xmlReader.Name)
-                        {
-                            case "Tile":
-                                var tileX = int.Parse(xmlReader["TileX"]);
-                                var tileY = int.Parse(xmlReader["TileY"]);
-                                var tileType = Tile.GetTypeFromString(xmlReader["TileType"]);
+        //    using (var xmlReader = XmlReader.Create(loadFile))
+        //    {
+        //        while(xmlReader.Read())
+        //        {
+        //            if(xmlReader.IsStartElement())
+        //            {
+        //                switch (xmlReader.Name)
+        //                {
+        //                    case "Tile":
+        //                        var tileX = int.Parse(xmlReader["TileX"]);
+        //                        var tileY = int.Parse(xmlReader["TileY"]);
+        //                        var tileType = Tile.GetTypeFromString(xmlReader["TileType"]);
 
-                                Current.Tiles[tileX, tileY].Type = tileType;
-                                break;
-                        }
-                    }
-                }
-            }
+        //                        Current.Tiles[tileX, tileY].Type = tileType;
+        //                        break;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            if (OnWorldModifyFinishCallback != null)
-                OnWorldModifyFinishCallback();
-        }
+        //    if (OnWorldModifyFinishCallback != null)
+        //        OnWorldModifyFinishCallback();
+        //}
     }
 }

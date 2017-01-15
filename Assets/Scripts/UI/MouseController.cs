@@ -7,7 +7,9 @@ namespace Assets.Scripts.UI
     public enum SelectionMode
     {
         None, // Selection does nothing.
-        Build // Handle building and clearing tiles.
+        Build, // Handle building and clearing tiles.
+        SetStart,
+        SetEnd
     }
 
     public class MouseController : MonoBehaviour
@@ -27,9 +29,12 @@ namespace Assets.Scripts.UI
         private Vector2 mouseDragStartPosition;
         private bool mouseDragging = false;
 
+        private WorldController worldController;
+
         public void Start()
         {
             SelectMode = SelectionMode.None;
+            worldController = FindObjectOfType<WorldController>();
         }
 
         public void Update()
@@ -157,6 +162,16 @@ namespace Assets.Scripts.UI
 
                 case SelectionMode.Build:
                     HandleBuildMode(_tile);
+                    break;
+
+                case SelectionMode.SetStart:
+                    // TODO: Set starting position for world.
+                    worldController.worldStartPosition = new Vector2(_tile.X, _tile.Y);
+                    break;
+
+                case SelectionMode.SetEnd:
+                    // TODO: Set ending position for the world.
+                    worldController.worldEndPosition = new Vector2(_tile.X, _tile.Y);
                     break;
             }
         }

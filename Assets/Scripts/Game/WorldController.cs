@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using System.Xml;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Game
@@ -9,6 +11,9 @@ namespace Assets.Scripts.Game
         public Sprite gridSprite;
 
         public Sprite[] wallSprites;
+
+        public Vector2 worldStartPosition = Vector2.one;
+        public Vector2 worldEndPosition = Vector2.one;
 
         [SerializeField]
         private int worldWidth = 16;
@@ -136,12 +141,103 @@ namespace Assets.Scripts.Game
 
         public void Save()
         {
-            World.Current.Save();
+            var xmlSettings = new XmlWriterSettings();
+            xmlSettings.Indent = true;
+            xmlSettings.IndentChars = "    ";
+            xmlSettings.NewLineOnAttributes = false;
+
+            var saveFile = Path.Combine(Directories.Save_Directory, worldName + ".xml");
+
+            using (var xmlWriter = XmlWriter.Create(saveFile, xmlSettings))
+            {
+                xmlWriter.WriteStartDocument();
+
+                xmlWriter.WriteStartElement("LevelSaveFile");
+                xmlWriter.WriteStartElement("LevelData");
+
+                xmlWriter.WriteAttributeString("WorldName", worldName);
+                xmlWriter.WriteAttributeString("WorldWidth", World.Current.Width.ToString());
+                xmlWriter.WriteAttributeString("WorldHeight", World.Current.Height.ToString());
+                xmlWriter.WriteAttributeString("WorldStartPositionX", worldStartPosition.x.ToString());
+                xmlWriter.WriteAttributeString("WorldStartPositionY", worldStartPosition.y.ToString());
+                xmlWriter.WriteAttributeString("WorldEndPositionX", worldEndPosition.x.ToString());
+                xmlWriter.WriteAttributeString("WorldEndPositionY", worldEndPosition.y.ToString());
+
+                xmlWriter.WriteStartElement("WorldTiles");
+
+                for (var x = 0; x < World.Current.Width; x++)
+                {
+                    for (var y = 0; y < World.Current.Height; y++)
+                    {
+                        var tile = World.Current.Tiles[x, y];
+                        if (tile.Type == TileType.Empty) continue;
+
+                        xmlWriter.WriteStartElement("Tile");
+                        xmlWriter.WriteAttributeString("TileType", tile.Type.ToString());
+                        xmlWriter.WriteAttributeString("TileX", tile.X.ToString());
+                        xmlWriter.WriteAttributeString("TileY", tile.Y.ToString());
+                        xmlWriter.WriteEndElement();
+                    }
+                }
+
+                xmlWriter.WriteEndElement(); // end WorldTiles element
+
+                xmlWriter.WriteEndElement(); // end LevelData element
+                xmlWriter.WriteEndElement(); // end LevelSaveFile element
+
+                xmlWriter.WriteEndDocument(); // end xml doc
+            }
         }
 
         public void Load(string _worldName)
         {
-            World.Current.Load(_worldName);
+            World.Current.WorldName = _worldName;
+            var loadFile = Path.Combine(Directories.Save_Directory, _worldName + ".xml");
+            Clear();
+
+            Debug.Log("Loading: " + loadFile);
+
+            using (var xmlReader = XmlReader.Create(loadFile))
+            {
+                while (xmlReader.Read())
+                {
+                    if (xmlReader.IsStartElement())
+                    {
+                        switch (xmlReader.Name)
+                        {
+                            case "LevelData":
+                                var worldStartX = int.Parse(xmlReader["WorldStartPositionX"]);
+                                var worldStartY = int.Parse(xmlReader["WorldStartPositionY"]);
+                                var worldEndX = int.Parse(xmlReader["WorldEndPositionX"]);
+                                var worldEndY = int.Parse(xmlReader["WorldEndPositionY"]);
+
+                                worldStartPosition = new Vector2(worldStartX, worldStartY);
+                                worldEndPosition = new Vector2(worldEndX, worldEndY);
+                                break;
+
+                            case "Tile":
+                                var tileX = int.Parse(xmlReader["TileX"]);
+                                var tileY = int.Parse(xmlReader["TileY"]);
+                                var tileType = Tile.GetTypeFromString(xmlReader["TileType"]);
+
+                                World.Current.Tiles[tileX, tileY].Type = tileType;
+                                break;
+                        }
+                    }
+                }
+            }
+
+            if (World.Current.OnWorldModifyFinishCallback != null)
+                World.Current.OnWorldModifyFinishCallback();
+        }
+
+        public void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(worldStartPosition, Vector2.one * 0.5f);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(worldEndPosition, Vector2.one * 0.5f);
         }
     }
 }

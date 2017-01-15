@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LevelSaveFile>
-    <LevelData WorldName="Level 1" WorldWidth="16" WorldHeight="16">
+    <LevelData WorldName="Level 1" WorldWidth="16" WorldHeight="16" WorldStartPositionX="1" WorldStartPositionY="1" WorldEndPositionX="4" WorldEndPositionY="1">
         <WorldTiles>
             <Tile TileType="Wall" TileX="0" TileY="0" />
             <Tile TileType="Wall" TileX="0" TileY="1" />

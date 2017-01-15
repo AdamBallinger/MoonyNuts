@@ -7,7 +7,8 @@ namespace Assets.Scripts.UI.LevelBuilder
     public class LevelBuilderUIController : MonoBehaviour
     {
 
-        public InputField worldNameInput;
+        public InputField worldSaveLevelInput;
+        public InputField worldLoadLevelInput;
 
         private WorldController worldController;
         private MouseController mouseController;
@@ -28,6 +29,9 @@ namespace Assets.Scripts.UI.LevelBuilder
             }
 
             Directories.Check();
+
+            worldSaveLevelInput.text = World.Current.WorldName;
+            worldLoadLevelInput.text = World.Current.WorldName;
         }
 
         public void OnBuildWallButtonPress()
@@ -48,10 +52,21 @@ namespace Assets.Scripts.UI.LevelBuilder
             }
         }
 
+        public void OnSetStartButtonPress()
+        {
+            mouseController.SelectMode = SelectionMode.SetStart;
+        }
+
+        public void OnSetEndButtonPress()
+        {
+            mouseController.SelectMode = SelectionMode.SetEnd;
+        }
+
         public void OnSaveLevelButtonPress()
         {
             if(worldController != null)
             {
+                World.Current.WorldName = worldSaveLevelInput.text;
                 worldController.Save();
             }
         }
@@ -60,7 +75,7 @@ namespace Assets.Scripts.UI.LevelBuilder
         {
             if(worldController != null)
             {
-                worldController.Load(worldNameInput.text);
+                worldController.Load(worldLoadLevelInput.text);
             }
         }
     }
