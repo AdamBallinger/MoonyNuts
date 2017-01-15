@@ -1,9 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.Game;
 using UnityEngine;
 
 namespace Assets.Scripts.API
 {
+    public enum Direction
+    {
+        Left,
+        Right,
+        Up,
+        Down
+    }
+
     public class CharacterAPIController : MonoBehaviour
     {
 
@@ -12,6 +21,7 @@ namespace Assets.Scripts.API
         public float stepDistance = 1f;
 
         private Vector2 targetPosition;
+        private Vector2 virtualPosition;
 
         private List<Action> functions;
 
@@ -21,6 +31,7 @@ namespace Assets.Scripts.API
             CharacterAPI.AddObject(gameObject);
 
             targetPosition = transform.position;
+            virtualPosition = transform.position;
         }
 
         public void Update()
@@ -51,6 +62,7 @@ namespace Assets.Scripts.API
         public void OnInterpreterTerminated()
         {
             functions.Clear();
+            virtualPosition = transform.position;
         }
 
         /// <summary>
@@ -67,7 +79,13 @@ namespace Assets.Scripts.API
         /// </summary>
         public void MoveLeft()
         {
-            functions.Add(() => targetPosition.x -= stepDistance);
+            var tileOn = World.Current.GetTileAtWorldCoord(virtualPosition);
+
+            if(CanMoveInDirection(Direction.Left, tileOn))
+            {
+                virtualPosition.x -= stepDistance;
+                functions.Add(() => targetPosition.x -= stepDistance);
+            }
         }
 
         /// <summary>
@@ -75,7 +93,13 @@ namespace Assets.Scripts.API
         /// </summary>
         public void MoveRight()
         {
-            functions.Add(() => targetPosition.x += stepDistance);
+            var tileOn = World.Current.GetTileAtWorldCoord(virtualPosition);
+
+            if (CanMoveInDirection(Direction.Right, tileOn))
+            {
+                virtualPosition.x += stepDistance;
+                functions.Add(() => targetPosition.x += stepDistance);
+            }
         }
 
         /// <summary>
@@ -83,7 +107,13 @@ namespace Assets.Scripts.API
         /// </summary>
         public void MoveUp()
         {
-            functions.Add(() => targetPosition.y += stepDistance);
+            var tileOn = World.Current.GetTileAtWorldCoord(virtualPosition);
+
+            if (CanMoveInDirection(Direction.Up, tileOn))
+            {
+                virtualPosition.y += stepDistance;
+                functions.Add(() => targetPosition.y += stepDistance);
+            }
         }
 
         /// <summary>
@@ -91,7 +121,38 @@ namespace Assets.Scripts.API
         /// </summary>
         public void MoveDown()
         {
-            functions.Add(() => targetPosition.y -= stepDistance);
+            var tileOn = World.Current.GetTileAtWorldCoord(virtualPosition);
+
+            if (CanMoveInDirection(Direction.Down, tileOn))
+            {
+                virtualPosition.y -= stepDistance;
+                functions.Add(() => targetPosition.y -= stepDistance);
+            }
+        }
+
+        private bool CanMoveInDirection(Direction _direction, Tile _originTile)
+        {
+            switch (_direction)
+            {
+                case Direction.Left:
+                    var tileLeft = World.Current.GetTileAt(_originTile.X - 1, _originTile.Y);
+                    return tileLeft != null && tileLeft.Type == TileType.Empty;
+
+                case Direction.Right:
+                    var tileRight = World.Current.GetTileAt(_originTile.X + 1, _originTile.Y);
+                    return tileRight != null && tileRight.Type == TileType.Empty;
+
+                case Direction.Up:
+                    var tileUp = World.Current.GetTileAt(_originTile.X, _originTile.Y + 1);
+                    return tileUp != null && tileUp.Type == TileType.Empty;
+
+                case Direction.Down:
+                    var tileDown = World.Current.GetTileAt(_originTile.X, _originTile.Y - 1);
+                    return tileDown != null && tileDown.Type == TileType.Empty;
+
+                default:
+                    return false;
+            }
         }
     }
 }

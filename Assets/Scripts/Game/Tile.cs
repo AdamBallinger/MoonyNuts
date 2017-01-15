@@ -72,6 +72,20 @@ namespace Assets.Scripts.Game
             typeChangeCallback += _callback;
         }
 
+        public static TileType GetTypeFromString(string _typeName)
+        {
+            switch(_typeName)
+            {
+                case "Empty":
+                    return TileType.Empty;
+                case "Wall":
+                    return TileType.Wall;
+
+                default:
+                    return TileType.Nothing;
+            }
+        }
+
         public bool HasAdjacentFlags(AdjacentFlag _flag)
         {
             return (Adjacent & _flag) == _flag;

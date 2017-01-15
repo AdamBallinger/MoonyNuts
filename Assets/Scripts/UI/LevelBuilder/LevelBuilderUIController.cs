@@ -1,10 +1,13 @@
 ﻿using Assets.Scripts.Game;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.LevelBuilder
 {
     public class LevelBuilderUIController : MonoBehaviour
     {
+
+        public InputField worldNameInput;
 
         private WorldController worldController;
         private MouseController mouseController;
@@ -23,6 +26,8 @@ namespace Assets.Scripts.UI.LevelBuilder
             {
                 Debug.LogError("[LevelBuilderUIController] - Failed to find mouse controller object.");
             }
+
+            Directories.Check();
         }
 
         public void OnBuildWallButtonPress()
@@ -55,8 +60,7 @@ namespace Assets.Scripts.UI.LevelBuilder
         {
             if(worldController != null)
             {
-                // TODO: figure out best way to handle loading levels.
-                worldController.Load("");
+                worldController.Load(worldNameInput.text);
             }
         }
     }

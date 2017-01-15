@@ -191,13 +191,34 @@ namespace Assets.Scripts.Game
 
         public void Load(string _worldName)
         {
+            Current.WorldName = _worldName;
             var loadFile = Path.Combine(Directories.Save_Directory, _worldName + ".xml");
             Current.Clear();
 
+            Debug.Log("Loading: " + loadFile);
+
             using (var xmlReader = XmlReader.Create(loadFile))
             {
-                
+                while(xmlReader.Read())
+                {
+                    if(xmlReader.IsStartElement())
+                    {
+                        switch (xmlReader.Name)
+                        {
+                            case "Tile":
+                                var tileX = int.Parse(xmlReader["TileX"]);
+                                var tileY = int.Parse(xmlReader["TileY"]);
+                                var tileType = Tile.GetTypeFromString(xmlReader["TileType"]);
+
+                                Current.Tiles[tileX, tileY].Type = tileType;
+                                break;
+                        }
+                    }
+                }
             }
+
+            if (OnWorldModifyFinishCallback != null)
+                OnWorldModifyFinishCallback();
         }
     }
 }

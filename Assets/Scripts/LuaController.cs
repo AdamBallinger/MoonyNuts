@@ -19,21 +19,23 @@ namespace Assets.Scripts
             Script.DefaultOptions.DebugPrint = Debug.Log;
             LuaInterpreter.Create();
 
-            inputField.text = @"d2 = GetCharacter(1)
-while true do
-duck.MoveLeft()
-duck.Speak()
-duck.MoveUp()
-duck.MoveRight()
-duck.MoveDown()
+//            inputField.text = @"d2 = GetCharacter(1)
+//while true do
+//duck.MoveLeft()
+//duck.Speak()
+//duck.MoveUp()
+//duck.MoveRight()
+//duck.MoveDown()
 
-d2.MoveRight()
-d2.MoveUp()
-d2.Speak()
-d2.MoveLeft()
-d2.MoveDown()
-end
-";
+//d2.MoveRight()
+//d2.MoveUp()
+//d2.Speak()
+//d2.MoveLeft()
+//d2.MoveDown()
+//end
+//";
+
+            inputField.text = @"sq = GetCharacter(1)";
 
             // Register types for the LUA interpreter to understand and use.
             RegisterObjectType(typeof(GameObject));

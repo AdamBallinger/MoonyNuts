@@ -16,6 +16,8 @@ namespace Assets.Scripts.Game
         private int worldHeight = 16;
         [SerializeField]
         private string worldName = "DefaultWorldName";
+        [SerializeField]
+        private bool loadLevelOnStart = false;
 
         private GameObject[,] tileGameObjects;
 
@@ -38,7 +40,8 @@ namespace Assets.Scripts.Game
                     var tileData = World.Current.GetTileAt(x, y);
                     tileData.RegisterTileTypeChangeCallback(tile => { OnTileTypeChanged(tileGO, tile); });
 
-                    tileGO.AddComponent<SpriteRenderer>();
+                    var tileSR = tileGO.AddComponent<SpriteRenderer>();
+                    tileSR.sortingOrder = -1;
                     tileGO.transform.position = new Vector2(tileData.X, tileData.Y);
                     tileData.Type = TileType.Empty;
 
@@ -47,6 +50,9 @@ namespace Assets.Scripts.Game
             }
 
             World.Current.SetBorderAsWalls();
+
+            if(loadLevelOnStart)
+                Load(worldName);
         }
 
         public void OnTileTypeChanged(GameObject _tileGO, Tile _tileData)
