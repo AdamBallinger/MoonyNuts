@@ -14,10 +14,14 @@ namespace Assets.Scripts.Game
         [SerializeField]
         private int worldHeight = 16;
 
+        private GameObject[,] tileGameObjects;
+
         public void Start()
         {
             World.Create(worldWidth, worldHeight);
             World.Current.RegisterWorldModifyCallback(OnWorldChangeFinish);
+
+            tileGameObjects = new GameObject[worldWidth, worldHeight];
 
             for (var x = 0; x < worldWidth; x++)
             {
@@ -34,21 +38,26 @@ namespace Assets.Scripts.Game
                     tileGO.AddComponent<SpriteRenderer>();
                     tileGO.transform.position = new Vector2(tileData.X, tileData.Y);
                     tileData.Type = TileType.Empty;
+
+                    tileGameObjects[x, y] = tileGO;
                 }
             }
+
+            World.Current.SetBorderAsWalls();
         }
 
         public void OnTileTypeChanged(GameObject _tileGO, Tile _tileData)
         {
-            switch (_tileData.Type)
-            {
-                case TileType.Empty:
-                    // TODO: Check if current scene is the level building scene and set to the grid sprite?
-                    break;
-                case TileType.Wall:
-                    _tileGO.GetComponent<SpriteRenderer>().sprite = _tileData.TileSprite;
-                    break;
-            }
+            //switch (_tileData.Type)
+            //{
+            //    case TileType.Empty:
+            //        // TODO: Check if current scene is the level building scene and set to the grid sprite?
+            //        break;
+            //    case TileType.Wall:
+            //        Debug.Log("HELLO");
+            //        _tileGO.GetComponent<SpriteRenderer>().sprite = _tileData.TileSprite;
+            //        break;
+            //}
         }
 
         public void OnWorldChangeFinish()
@@ -112,7 +121,7 @@ namespace Assets.Scripts.Game
                 spriteIndex += 4;
             }
 
-            _tile.TileSprite = wallSprites[spriteIndex];
+            tileGameObjects[_tile.X, _tile.Y].GetComponent<SpriteRenderer>().sprite = wallSprites[spriteIndex];
         }
 
         public void Clear()

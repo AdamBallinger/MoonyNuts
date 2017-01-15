@@ -39,8 +39,6 @@ namespace Assets.Scripts.Game
         public int X { get; private set; }
         public int Y { get; private set; }
 
-        public Sprite TileSprite { get; set; }
-
         private AdjacentFlag Adjacent { get; set; }
 
         private Action<Tile> typeChangeCallback;
