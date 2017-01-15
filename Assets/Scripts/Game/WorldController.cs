@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Game
 {
@@ -13,12 +14,14 @@ namespace Assets.Scripts.Game
         private int worldWidth = 16;
         [SerializeField]
         private int worldHeight = 16;
+        [SerializeField]
+        private string worldName = "DefaultWorldName";
 
         private GameObject[,] tileGameObjects;
 
         public void Start()
         {
-            World.Create(worldWidth, worldHeight);
+            World.Create(worldName, worldWidth, worldHeight);
             World.Current.RegisterWorldModifyCallback(OnWorldChangeFinish);
 
             tileGameObjects = new GameObject[worldWidth, worldHeight];
@@ -48,16 +51,12 @@ namespace Assets.Scripts.Game
 
         public void OnTileTypeChanged(GameObject _tileGO, Tile _tileData)
         {
-            //switch (_tileData.Type)
-            //{
-            //    case TileType.Empty:
-            //        // TODO: Check if current scene is the level building scene and set to the grid sprite?
-            //        break;
-            //    case TileType.Wall:
-            //        Debug.Log("HELLO");
-            //        _tileGO.GetComponent<SpriteRenderer>().sprite = _tileData.TileSprite;
-            //        break;
-            //}
+            switch (_tileData.Type)
+            {
+                case TileType.Empty:
+                    _tileGO.GetComponent<SpriteRenderer>().sprite = SceneManager.GetActiveScene().name == "level_builder" ? gridSprite : null;
+                    break;
+            }
         }
 
         public void OnWorldChangeFinish()
@@ -127,6 +126,16 @@ namespace Assets.Scripts.Game
         public void Clear()
         {
             World.Current.Clear();
+        }
+
+        public void Save()
+        {
+            World.Current.Save();
+        }
+
+        public void Load(string _worldName)
+        {
+            World.Current.Load(_worldName);
         }
     }
 }

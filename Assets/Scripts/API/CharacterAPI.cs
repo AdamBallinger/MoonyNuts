@@ -50,6 +50,7 @@ namespace Assets.Scripts.API
             if(_id > objects.Count || _id < 0)
             {
                 Debug.LogError("[CharacterAPI] - Attempted to get a gameobject out of the objects list bounds!");
+                return null;
             }
 
             return objects[_id].GetComponent<CharacterAPIController>();

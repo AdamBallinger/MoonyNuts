@@ -169,11 +169,12 @@ namespace Assets.Scripts.UI
                     break;
 
                 case TileType.Empty:
-                    // TODO: Clear tile. Tiles will also need to have any colliders etc removed if they exist.
+                    if (_tile.X == 0 || _tile.X >= World.Current.Width || _tile.Y == 0 || _tile.Y >= World.Current.Height) break;
+                    World.Current.Tiles[_tile.X, _tile.Y].Type = TileType.Empty;
                     break;
 
                 case TileType.Wall:
-                    // TODO: Build wall. Tiles will need colliders etc added.
+                    World.Current.Tiles[_tile.X, _tile.Y].Type = TileType.Wall;
                     break;
             }
         }

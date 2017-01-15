@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml;
 using UnityEngine;
 
 namespace Assets.Scripts.Game
@@ -11,7 +13,9 @@ namespace Assets.Scripts.Game
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        private Tile[,] Tiles { get; set; }
+        public string WorldName { get; private set; }
+
+        public Tile[,] Tiles { get; private set; }
 
         public Action OnWorldModifyFinishCallback;
 
@@ -22,12 +26,14 @@ namespace Assets.Scripts.Game
         /// </summary>
         /// <param name="_width"></param>
         /// <param name="_height"></param>
-        public static void Create(int _width = 16, int _height = 16)
+        /// <param name="_worldName"></param>
+        public static void Create(string _worldName, int _width = 16, int _height = 16)
         {
             Current = new World();
             Current.Width = _width;
             Current.Height = _height;
             Current.Init();
+            Current.WorldName = _worldName;
         }
 
         /// <summary>
@@ -135,6 +141,63 @@ namespace Assets.Scripts.Game
         public void RegisterWorldModifyCallback(Action _callback)
         {
             OnWorldModifyFinishCallback += _callback;
+        }
+
+        public void Save()
+        {
+            var xmlSettings = new XmlWriterSettings();
+            xmlSettings.Indent = true;
+            xmlSettings.IndentChars = "    ";
+            xmlSettings.NewLineOnAttributes = false;
+
+            var saveFile = Path.Combine(Directories.Save_Directory, WorldName + ".xml");
+
+            using (var xmlWriter = XmlWriter.Create(saveFile, xmlSettings))
+            {
+                xmlWriter.WriteStartDocument();
+
+                xmlWriter.WriteStartElement("LevelSaveFile");
+                xmlWriter.WriteStartElement("LevelData");
+
+                xmlWriter.WriteAttributeString("WorldName", WorldName);
+                xmlWriter.WriteAttributeString("WorldWidth", Width.ToString());
+                xmlWriter.WriteAttributeString("WorldHeight", Height.ToString());
+
+                xmlWriter.WriteStartElement("WorldTiles");
+
+                for(var x = 0; x < Width; x++)
+                {
+                    for(var y = 0; y < Height; y++)
+                    {
+                        var tile = Tiles[x, y];
+                        if(tile.Type == TileType.Empty) continue;
+                        
+                        xmlWriter.WriteStartElement("Tile");
+                        xmlWriter.WriteAttributeString("TileType", tile.Type.ToString());
+                        xmlWriter.WriteAttributeString("TileX", tile.X.ToString());
+                        xmlWriter.WriteAttributeString("TileY", tile.Y.ToString());
+                        xmlWriter.WriteEndElement();
+                    }
+                }
+
+                xmlWriter.WriteEndElement(); // end WorldTiles element
+
+                xmlWriter.WriteEndElement(); // end LevelData element
+                xmlWriter.WriteEndElement(); // end LevelSaveFile element
+
+                xmlWriter.WriteEndDocument(); // end xml doc
+            }
+        }
+
+        public void Load(string _worldName)
+        {
+            var loadFile = Path.Combine(Directories.Save_Directory, _worldName + ".xml");
+            Current.Clear();
+
+            using (var xmlReader = XmlReader.Create(loadFile))
+            {
+                
+            }
         }
     }
 }
