@@ -46,6 +46,26 @@ namespace Assets.Scripts.Game
             }
         }
 
+        public void SetBorderAsWalls()
+        {
+            Debug.Log("Setting border");
+            for(var x = 0; x < Current.Width; x++)
+            {
+                for(var y = 0; y < Current.Height; y++)
+                {
+                    if(x == 0 || y == 0 || x == Current.Width - 1 || y == Current.Height - 1)
+                    {
+                        Current.Tiles[x, y].Type = TileType.Wall;
+                    }
+                }
+            }
+
+            if(OnWorldModifyFinishCallback != null)
+            {
+                OnWorldModifyFinishCallback();
+            }
+        }
+
         /// <summary>
         /// Clears the current world by setting each tile to an empty tile.
         /// </summary>
