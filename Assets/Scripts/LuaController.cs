@@ -41,7 +41,7 @@ namespace Assets.Scripts
             // Set the globals for the interpreter.
             LuaInterpreter.Current.Script.Globals["GetCharacter"] = (Func<int, CharacterAPIController>) CharacterAPI.GetGameObject;
             LuaInterpreter.Current.Script.Globals["GetCharacterID"] = (Func<GameObject, int>) CharacterAPI.GetID;
-            LuaInterpreter.Current.Script.Globals["duck"] = CharacterAPI.GetGameObject(0);
+            //LuaInterpreter.Current.Script.Globals["player"] = CharacterAPI.GetGameObject(0);
 
             var scriptResult = LuaInterpreter.Current.Run();
             errorOutput.text = scriptResult;

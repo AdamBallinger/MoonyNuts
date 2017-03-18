@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Assets.Scripts.Game;
 using UnityEngine;
@@ -57,12 +57,71 @@ namespace Assets.Scripts.API
         }
 
         /// <summary>
+        /// Called when the LUA interpreter is started.
+        /// </summary>
+        public void OnInterpreterStarted()
+        {
+            virtualPosition = transform.position;
+        }
+
+        /// <summary>
         /// Called when the LUA interpreter is terminated.
         /// </summary>
         public void OnInterpreterTerminated()
         {
             functions.Clear();
-            virtualPosition = transform.position;
+        }
+
+        /// <summary>
+        /// API call to try interact with a tile to the left.
+        /// </summary>
+        public void InteractLeft()
+        {
+            var leftTile = World.Current.GetTileAt((int)virtualPosition.x - 1, (int)virtualPosition.y);
+
+            if(leftTile != null)
+            {
+                // TODO: Implement tile interact system. Enque the interaction with functions list.
+            }
+        }
+
+        /// <summary>
+        /// API call to try interact with a tile to the right.
+        /// </summary>
+        public void InteractRight()
+        {
+            var rightTile = World.Current.GetTileAt((int)virtualPosition.x + 1, (int)virtualPosition.y);
+
+            if (rightTile != null)
+            {
+                // TODO: Implement tile interact system. Enque the interaction with functions list.
+            }
+        }
+
+        /// <summary>
+        /// API call to try interact with a tile above.
+        /// </summary>
+        public void InteractUp()
+        {
+            var upTile = World.Current.GetTileAt((int)virtualPosition.x, (int)virtualPosition.y + 1);
+
+            if (upTile != null)
+            {
+                // TODO: Implement tile interact system. Enque the interaction with functions list.
+            }
+        }
+
+        /// <summary>
+        /// API call to try interact with a tile bellow.
+        /// </summary>
+        public void InteractDown()
+        {
+            var downTile = World.Current.GetTileAt((int)virtualPosition.x, (int)virtualPosition.y - 1);
+
+            if (downTile != null)
+            {
+                // TODO: Implement tile interact system. Enque the interaction with functions list.
+            }
         }
 
         /// <summary>
@@ -70,7 +129,6 @@ namespace Assets.Scripts.API
         /// </summary>
         public void Speak()
         {
-            // Lambda
             functions.Add(() => GetComponent<AudioSource>().Play());
         }
 

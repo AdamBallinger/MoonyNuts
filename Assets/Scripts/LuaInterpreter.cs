@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Assets.Scripts.API;
 using MoonSharp.Interpreter;
 using UnityEngine;
@@ -56,6 +56,11 @@ namespace Assets.Scripts
                 Debug.LogWarning("LUA ERROR");
                 Terminate();
                 return exception.DecoratedMessage;
+            }
+
+            foreach (var obj in CharacterAPI.GetObjects())
+            {
+                obj.SendMessage("OnInterpreterStarted", SendMessageOptions.DontRequireReceiver);
             }
 
             return "Code check: OK";
