@@ -125,14 +125,6 @@ namespace Assets.Scripts.API
         }
 
         /// <summary>
-        /// API call to make the character speak.
-        /// </summary>
-        public void Speak()
-        {
-            functions.Add(() => GetComponent<AudioSource>().Play());
-        }
-
-        /// <summary>
         /// API call to make the character move left by the specified step distance.
         /// </summary>
         public void MoveLeft()
