@@ -1,6 +1,4 @@
-﻿
 using System;
-using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
@@ -74,7 +72,7 @@ namespace Assets.Scripts.Game
 
         public static TileType GetTypeFromString(string _typeName)
         {
-            switch(_typeName)
+            switch (_typeName)
             {
                 case "Empty":
                     return TileType.Empty;
@@ -104,7 +102,7 @@ namespace Assets.Scripts.Game
 
         public void CheckAdjacent(Tile _tile, AdjacentFlag _direction)
         {
-            if(_tile == null || _tile.Type == TileType.Empty)
+            if (_tile == null || _tile.Type == TileType.Empty)
             {
                 AddAdjacentFlag(_direction);
             }
