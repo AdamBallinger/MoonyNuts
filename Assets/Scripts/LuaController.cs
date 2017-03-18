@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Assets.Scripts.API;
 using MoonSharp.Interpreter;
 using UnityEngine;
@@ -13,41 +13,16 @@ namespace Assets.Scripts
         public InputField inputField;
         public InputField errorOutput;
 
+        [Multiline]
+        public string inputDefaultText = string.Empty;
+
         public void Start()
         {
             // Set the LUA print function to use the Unity Debug.Log function.
             Script.DefaultOptions.DebugPrint = Debug.Log;
             LuaInterpreter.Create();
 
-//            inputField.text = @"d2 = GetCharacter(1)
-//while true do
-//duck.MoveLeft()
-//duck.Speak()
-//duck.MoveUp()
-//duck.MoveRight()
-//duck.MoveDown()
-
-//d2.MoveRight()
-//d2.MoveUp()
-//d2.Speak()
-//d2.MoveLeft()
-//d2.MoveDown()
-//end
-//";
-
-            inputField.text = @"sq = GetCharacter(1)
-for i=0, 4 do
-    sq.MoveUp()
-end
-
-for i=0, 2 do
-    sq.MoveRight()
-end
-
-for i=0, 4 do
-    sq.MoveDown()
-end
-sq.MoveRight()";
+            inputField.text = inputDefaultText;
 
             // Register types for the LUA interpreter to understand and use.
             RegisterObjectType(typeof(GameObject));
