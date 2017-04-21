@@ -230,19 +230,19 @@ namespace Assets.Scripts.API
             {
                 case Direction.Left:
                     var tileLeft = World.Current.GetTileAt(_originTile.X - 1, _originTile.Y);
-                    return tileLeft != null && tileLeft.Type == TileType.Empty;
+                    return tileLeft != null && tileLeft.Type != TileType.Wall;
 
                 case Direction.Right:
                     var tileRight = World.Current.GetTileAt(_originTile.X + 1, _originTile.Y);
-                    return tileRight != null && tileRight.Type == TileType.Empty;
+                    return tileRight != null && tileRight.Type != TileType.Wall;
 
                 case Direction.Up:
                     var tileUp = World.Current.GetTileAt(_originTile.X, _originTile.Y + 1);
-                    return tileUp != null && tileUp.Type == TileType.Empty;
+                    return tileUp != null && tileUp.Type != TileType.Wall;
 
                 case Direction.Down:
                     var tileDown = World.Current.GetTileAt(_originTile.X, _originTile.Y - 1);
-                    return tileDown != null && tileDown.Type == TileType.Empty;
+                    return tileDown != null && tileDown.Type != TileType.Wall;
 
                 default:
                     return false;
