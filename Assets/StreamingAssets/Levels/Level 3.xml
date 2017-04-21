@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LevelSaveFile>
-    <LevelData WorldName="Level 1" WorldWidth="16" WorldHeight="16" WorldStartPositionX="5" WorldStartPositionY="9" WorldEndPositionX="7" WorldEndPositionY="7">
+    <LevelData WorldName="Level 1" WorldWidth="16" WorldHeight="16" WorldStartPositionX="2" WorldStartPositionY="8" WorldEndPositionX="10" WorldEndPositionY="8">
         <WorldTiles>
             <Tile TileType="Wall" TileX="0" TileY="0" />
             <Tile TileType="Wall" TileX="0" TileY="1" />
@@ -19,7 +19,6 @@
             <Tile TileType="Wall" TileX="0" TileY="14" />
             <Tile TileType="Wall" TileX="0" TileY="15" />
             <Tile TileType="Wall" TileX="1" TileY="0" />
-            <Tile TileType="Wall" TileX="1" TileY="1" />
             <Tile TileType="Wall" TileX="1" TileY="2" />
             <Tile TileType="Wall" TileX="1" TileY="3" />
             <Tile TileType="Wall" TileX="1" TileY="4" />
@@ -42,7 +41,7 @@
             <Tile TileType="Wall" TileX="2" TileY="5" />
             <Tile TileType="Wall" TileX="2" TileY="6" />
             <Tile TileType="Wall" TileX="2" TileY="7" />
-            <Tile TileType="Wall" TileX="2" TileY="8" />
+            <Tile TileType="Start" TileX="2" TileY="8" />
             <Tile TileType="Wall" TileX="2" TileY="9" />
             <Tile TileType="Wall" TileX="2" TileY="10" />
             <Tile TileType="Wall" TileX="2" TileY="11" />
@@ -58,7 +57,6 @@
             <Tile TileType="Wall" TileX="3" TileY="5" />
             <Tile TileType="Wall" TileX="3" TileY="6" />
             <Tile TileType="Wall" TileX="3" TileY="7" />
-            <Tile TileType="Wall" TileX="3" TileY="8" />
             <Tile TileType="Wall" TileX="3" TileY="9" />
             <Tile TileType="Wall" TileX="3" TileY="10" />
             <Tile TileType="Wall" TileX="3" TileY="11" />
@@ -74,9 +72,6 @@
             <Tile TileType="Wall" TileX="4" TileY="5" />
             <Tile TileType="Wall" TileX="4" TileY="6" />
             <Tile TileType="Wall" TileX="4" TileY="7" />
-            <Tile TileType="Wall" TileX="4" TileY="8" />
-            <Tile TileType="Wall" TileX="4" TileY="9" />
-            <Tile TileType="Wall" TileX="4" TileY="10" />
             <Tile TileType="Wall" TileX="4" TileY="11" />
             <Tile TileType="Wall" TileX="4" TileY="12" />
             <Tile TileType="Wall" TileX="4" TileY="13" />
@@ -91,8 +86,7 @@
             <Tile TileType="Wall" TileX="5" TileY="6" />
             <Tile TileType="Wall" TileX="5" TileY="7" />
             <Tile TileType="Wall" TileX="5" TileY="8" />
-            <Tile TileType="Start" TileX="5" TileY="9" />
-            <Tile TileType="Wall" TileX="5" TileY="10" />
+            <Tile TileType="Wall" TileX="5" TileY="9" />
             <Tile TileType="Wall" TileX="5" TileY="11" />
             <Tile TileType="Wall" TileX="5" TileY="12" />
             <Tile TileType="Wall" TileX="5" TileY="13" />
@@ -106,8 +100,6 @@
             <Tile TileType="Wall" TileX="6" TileY="5" />
             <Tile TileType="Wall" TileX="6" TileY="6" />
             <Tile TileType="Wall" TileX="6" TileY="7" />
-            <Tile TileType="Wall" TileX="6" TileY="8" />
-            <Tile TileType="Wall" TileX="6" TileY="10" />
             <Tile TileType="Wall" TileX="6" TileY="11" />
             <Tile TileType="Wall" TileX="6" TileY="12" />
             <Tile TileType="Wall" TileX="6" TileY="13" />
@@ -120,7 +112,8 @@
             <Tile TileType="Wall" TileX="7" TileY="4" />
             <Tile TileType="Wall" TileX="7" TileY="5" />
             <Tile TileType="Wall" TileX="7" TileY="6" />
-            <Tile TileType="End" TileX="7" TileY="7" />
+            <Tile TileType="Wall" TileX="7" TileY="7" />
+            <Tile TileType="Wall" TileX="7" TileY="9" />
             <Tile TileType="Wall" TileX="7" TileY="10" />
             <Tile TileType="Wall" TileX="7" TileY="11" />
             <Tile TileType="Wall" TileX="7" TileY="12" />
@@ -135,9 +128,6 @@
             <Tile TileType="Wall" TileX="8" TileY="5" />
             <Tile TileType="Wall" TileX="8" TileY="6" />
             <Tile TileType="Wall" TileX="8" TileY="7" />
-            <Tile TileType="Wall" TileX="8" TileY="8" />
-            <Tile TileType="Wall" TileX="8" TileY="9" />
-            <Tile TileType="Wall" TileX="8" TileY="10" />
             <Tile TileType="Wall" TileX="8" TileY="11" />
             <Tile TileType="Wall" TileX="8" TileY="12" />
             <Tile TileType="Wall" TileX="8" TileY="13" />
@@ -153,7 +143,6 @@
             <Tile TileType="Wall" TileX="9" TileY="7" />
             <Tile TileType="Wall" TileX="9" TileY="8" />
             <Tile TileType="Wall" TileX="9" TileY="9" />
-            <Tile TileType="Wall" TileX="9" TileY="10" />
             <Tile TileType="Wall" TileX="9" TileY="11" />
             <Tile TileType="Wall" TileX="9" TileY="12" />
             <Tile TileType="Wall" TileX="9" TileY="13" />
@@ -167,9 +156,7 @@
             <Tile TileType="Wall" TileX="10" TileY="5" />
             <Tile TileType="Wall" TileX="10" TileY="6" />
             <Tile TileType="Wall" TileX="10" TileY="7" />
-            <Tile TileType="Wall" TileX="10" TileY="8" />
-            <Tile TileType="Wall" TileX="10" TileY="9" />
-            <Tile TileType="Wall" TileX="10" TileY="10" />
+            <Tile TileType="End" TileX="10" TileY="8" />
             <Tile TileType="Wall" TileX="10" TileY="11" />
             <Tile TileType="Wall" TileX="10" TileY="12" />
             <Tile TileType="Wall" TileX="10" TileY="13" />
@@ -257,5 +244,5 @@
             <Tile TileType="Wall" TileX="15" TileY="15" />
         </WorldTiles>
     </LevelData>
-    <CameraData CameraX="8.935191" CameraY="8.11552" CameraZoom="3.18881" />
+    <CameraData CameraX="7.240789" CameraY="9.05457" CameraZoom="3.67416" />
 </LevelSaveFile>

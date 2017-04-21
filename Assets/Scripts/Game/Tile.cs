@@ -6,7 +6,9 @@ namespace Assets.Scripts.Game
     {
         Nothing,
         Empty,
-        Wall
+        Wall,
+        Start,
+        End
     }
 
     [Flags]
@@ -78,7 +80,10 @@ namespace Assets.Scripts.Game
                     return TileType.Empty;
                 case "Wall":
                     return TileType.Wall;
-
+                case "Start":
+                    return TileType.Start;
+                case "End":
+                    return TileType.End;
                 default:
                     return TileType.Nothing;
             }
@@ -100,9 +105,15 @@ namespace Assets.Scripts.Game
             Adjacent |= _flag;
         }
 
+        /// <summary>
+        /// Checks if the given tile in the given direction to this tile is a wall. If a wall exists, then the adjacent flag for that direction is set,
+        /// and the wall sprite will not connect to the given tile.
+        /// </summary>
+        /// <param name="_tile"></param>
+        /// <param name="_direction"></param>
         public void CheckAdjacent(Tile _tile, AdjacentFlag _direction)
         {
-            if (_tile == null || _tile.Type == TileType.Empty)
+            if (_tile == null || _tile.Type != TileType.Wall)
             {
                 AddAdjacentFlag(_direction);
             }

@@ -165,13 +165,23 @@ namespace Assets.Scripts.UI
                     break;
 
                 case SelectionMode.SetStart:
-                    // TODO: Set starting position for world.
+                    if (_tile.Type == TileType.Wall) break;
+
+                    var currentStartTile = World.Current.Tiles[(int)worldController.worldStartPosition.x, (int)worldController.worldStartPosition.y];
+                    currentStartTile.Type = TileType.Empty;
+
                     worldController.worldStartPosition = new Vector2(_tile.X, _tile.Y);
+                    _tile.Type = TileType.Start;
                     break;
 
                 case SelectionMode.SetEnd:
-                    // TODO: Set ending position for the world.
+                    if (_tile.Type == TileType.Wall) break;
+
+                    var currentEndTile = World.Current.Tiles[(int)worldController.worldEndPosition.x, (int)worldController.worldEndPosition.y];
+                    currentEndTile.Type = TileType.Empty;
+
                     worldController.worldEndPosition = new Vector2(_tile.X, _tile.Y);
+                    _tile.Type = TileType.End;
                     break;
             }
         }

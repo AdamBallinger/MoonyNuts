@@ -10,6 +10,7 @@ namespace Assets.Scripts.Game
 
         public Sprite gridSprite;
 
+        public Sprite[] startEndSprites;
         public Sprite[] wallSprites;
 
         public Vector2 worldStartPosition = Vector2.one;
@@ -56,7 +57,7 @@ namespace Assets.Scripts.Game
 
             World.Current.SetBorderAsWalls();
 
-            if(loadLevelOnStart)
+            if (loadLevelOnStart)
                 Load(worldName);
         }
 
@@ -66,6 +67,12 @@ namespace Assets.Scripts.Game
             {
                 case TileType.Empty:
                     _tileGO.GetComponent<SpriteRenderer>().sprite = SceneManager.GetActiveScene().name == "level_builder" ? gridSprite : null;
+                    break;
+                case TileType.Start:
+                    _tileGO.GetComponent<SpriteRenderer>().sprite = startEndSprites[0];
+                    break;
+                case TileType.End:
+                    _tileGO.GetComponent<SpriteRenderer>().sprite = startEndSprites[1];
                     break;
             }
         }
@@ -146,7 +153,9 @@ namespace Assets.Scripts.Game
             xmlSettings.IndentChars = "    ";
             xmlSettings.NewLineOnAttributes = false;
 
-            var saveFile = Path.Combine(Directories.Save_Directory, worldName + ".xml");
+            var saveFile = Path.Combine(Directories.Save_Directory, World.Current.WorldName + ".xml");
+
+            Debug.Log("Saving: " + saveFile);
 
             using (var xmlWriter = XmlWriter.Create(saveFile, xmlSettings))
             {
@@ -181,8 +190,14 @@ namespace Assets.Scripts.Game
                 }
 
                 xmlWriter.WriteEndElement(); // end WorldTiles element
-
                 xmlWriter.WriteEndElement(); // end LevelData element
+
+                xmlWriter.WriteStartElement("CameraData");
+                xmlWriter.WriteAttributeString("CameraX", Camera.main.transform.position.x.ToString());
+                xmlWriter.WriteAttributeString("CameraY", Camera.main.transform.position.y.ToString());
+                xmlWriter.WriteAttributeString("CameraZoom", Camera.main.orthographicSize.ToString());
+                xmlWriter.WriteEndElement(); // end CameraData element
+
                 xmlWriter.WriteEndElement(); // end LevelSaveFile element
 
                 xmlWriter.WriteEndDocument(); // end xml doc
@@ -221,6 +236,18 @@ namespace Assets.Scripts.Game
                                 var tileType = Tile.GetTypeFromString(xmlReader["TileType"]);
 
                                 World.Current.Tiles[tileX, tileY].Type = tileType;
+                                break;
+
+                            case "CameraData":
+                                var cameraX = float.Parse(xmlReader["CameraX"]);
+                                var cameraY = float.Parse(xmlReader["CameraY"]);
+                                var cameraZoom = float.Parse(xmlReader["CameraZoom"]);
+
+                                var camPos = Camera.main.transform.position;
+                                camPos.x = cameraX;
+                                camPos.y = cameraY;
+                                Camera.main.transform.position = camPos;
+                                Camera.main.orthographicSize = cameraZoom;
                                 break;
                         }
                     }
