@@ -70,6 +70,12 @@ namespace Assets.Scripts.API
             targetPosition = _position;
         }
 
+        public void ResetPosition()
+        {
+            var startTile = FindObjectOfType<WorldController>().worldStartPosition;
+            SetPosition(new Vector2(startTile.x, startTile.y));
+        }
+
         /// <summary>
         /// Called when the LUA interpreter is started.
         /// </summary>
