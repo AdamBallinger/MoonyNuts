@@ -13,7 +13,10 @@ namespace Assets.Scripts
         public InputField inputField;
         public InputField errorOutput;
 
+        public bool setDefaultText = true;
+
         [Multiline]
+        [TextArea(4, 30)]
         public string inputDefaultText = string.Empty;
 
         public void Start()
@@ -22,7 +25,8 @@ namespace Assets.Scripts
             Script.DefaultOptions.DebugPrint = Debug.Log;
             LuaInterpreter.Create();
 
-            inputField.text = inputDefaultText;
+            if(setDefaultText)
+                inputField.text = inputDefaultText;
 
             // Register types for the LUA interpreter to understand and use.
             RegisterObjectType(typeof(GameObject));

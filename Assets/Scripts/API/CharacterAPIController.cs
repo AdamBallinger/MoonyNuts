@@ -20,6 +20,10 @@ namespace Assets.Scripts.API
 
         public float stepDistance = 1f;
 
+        public float interactLength = 1.0f;
+
+        public LayerMask interactMask;
+
         private Vector2 targetPosition;
         private Vector2 virtualPosition;
 
@@ -73,54 +77,56 @@ namespace Assets.Scripts.API
         }
 
         /// <summary>
-        /// API call to try interact with a tile to the left.
+        /// API call to try interact with an object to the left.
         /// </summary>
         public void InteractLeft()
         {
-            var leftTile = World.Current.GetTileAt((int)virtualPosition.x - 1, (int)virtualPosition.y);
-
-            if(leftTile != null)
-            {
-                // TODO: Implement tile interact system. Enque the interaction with functions list.
-            }
+            functions.Add(() => InteractWithObjectAtDir(Vector2.left));
         }
 
         /// <summary>
-        /// API call to try interact with a tile to the right.
+        /// API call to try interact with an object to the right.
         /// </summary>
         public void InteractRight()
         {
-            var rightTile = World.Current.GetTileAt((int)virtualPosition.x + 1, (int)virtualPosition.y);
-
-            if (rightTile != null)
-            {
-                // TODO: Implement tile interact system. Enque the interaction with functions list.
-            }
+            functions.Add(() => InteractWithObjectAtDir(Vector2.right));
         }
 
         /// <summary>
-        /// API call to try interact with a tile above.
+        /// API call to try interact with an object above.
         /// </summary>
         public void InteractUp()
         {
-            var upTile = World.Current.GetTileAt((int)virtualPosition.x, (int)virtualPosition.y + 1);
-
-            if (upTile != null)
-            {
-                // TODO: Implement tile interact system. Enque the interaction with functions list.
-            }
+            functions.Add(() => InteractWithObjectAtDir(Vector2.up));
         }
 
         /// <summary>
-        /// API call to try interact with a tile bellow.
+        /// API call to try interact with an object bellow.
         /// </summary>
         public void InteractDown()
         {
-            var downTile = World.Current.GetTileAt((int)virtualPosition.x, (int)virtualPosition.y - 1);
+            functions.Add(() => InteractWithObjectAtDir(Vector2.down));
+        }
 
-            if (downTile != null)
+        /// <summary>
+        /// Try to interact with an object in a given normalised direction if it has the interactable object component on it.
+        /// </summary>
+        /// <param name="_dir"></param>
+        private void InteractWithObjectAtDir(Vector2 _dir)
+        {
+            var hit = Physics2D.Raycast(transform.position, _dir, interactLength, interactMask);
+
+            if(hit)
             {
-                // TODO: Implement tile interact system. Enque the interaction with functions list.
+                var interactableObject = hit.collider.gameObject.GetComponent<InteractableObject>();
+
+                if (interactableObject != null)
+                {
+                    if (interactableObject.onInteract != null)
+                    {
+                        interactableObject.onInteract.Invoke();
+                    }
+                }
             }
         }
 
