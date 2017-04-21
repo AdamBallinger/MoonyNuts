@@ -120,6 +120,7 @@ namespace Assets.Scripts
             }
 
             Current.IsRunning = false;
+            Current.Terminate();
         }
     }
 }

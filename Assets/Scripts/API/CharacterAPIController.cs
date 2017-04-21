@@ -90,6 +90,7 @@ namespace Assets.Scripts.API
         /// </summary>
         public void OnInterpreterTerminated()
         {
+            ResetPosition();
             functions.Clear();
         }
 
