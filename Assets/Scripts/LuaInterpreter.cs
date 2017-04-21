@@ -15,6 +15,7 @@ namespace Assets.Scripts
         private DynValue coroutine;
 
         public Script Script { get; private set; }
+        public bool IsRunning { get; private set; }
 
         /// <summary>
         /// Creates a new LUA interpreter instance.
@@ -22,6 +23,7 @@ namespace Assets.Scripts
         public static void Create()
         {
             Current = new LuaInterpreter();
+            Current.IsRunning = false;
             Current.Script = new Script();
         }
 
@@ -54,7 +56,7 @@ namespace Assets.Scripts
             catch (InterpreterException exception)
             {
                 Debug.LogWarning("LUA ERROR");
-                Terminate();
+                Current.Terminate();
                 return exception.DecoratedMessage;
             }
 
@@ -63,6 +65,7 @@ namespace Assets.Scripts
                 obj.SendMessage("OnInterpreterStarted", SendMessageOptions.DontRequireReceiver);
             }
 
+            Current.IsRunning = true;
             return "Code check: OK";
         }
 
@@ -109,10 +112,14 @@ namespace Assets.Scripts
                 }
                 catch (ScriptRuntimeException exception)
                 {
-                    Terminate();
+                    Current.Terminate();
                     UnityEngine.Object.FindObjectOfType<LuaController>().errorOutput.text = exception.DecoratedMessage;
                 }
+
+                return;
             }
+
+            Current.IsRunning = false;
         }
     }
 }

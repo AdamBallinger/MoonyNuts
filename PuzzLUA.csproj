@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\UI\LevelBuilder\LevelBuilderUIController.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\UI\MouseController.cs" />
+    <Compile Include="Assets\Scripts\UI\TutorialBoxController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StreamingAssets\Levels\Level 1.xml" />

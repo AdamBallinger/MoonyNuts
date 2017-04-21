@@ -13,6 +13,9 @@ namespace Assets.Scripts
         public InputField inputField;
         public InputField errorOutput;
 
+        public GameObject runningImageGO;
+        public GameObject stoppedImageGO;
+
         public bool setDefaultText = true;
 
         [Multiline]
@@ -69,6 +72,15 @@ namespace Assets.Scripts
         public void RegisterObjectType(Type _type)
         {
             UserData.RegisterType(_type);
+        }
+
+        private void Update()
+        {
+            if(LuaInterpreter.Current != null)
+            {
+                runningImageGO.SetActive(LuaInterpreter.Current.IsRunning);
+                stoppedImageGO.SetActive(!LuaInterpreter.Current.IsRunning);
+            }
         }
     }
 }

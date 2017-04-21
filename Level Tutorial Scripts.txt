@@ -1,0 +1,98 @@
+-----------------------------------------------------
+LEVEL 1
+-----------------------------------------------------
+
+ELEMENT 0:
+-------------
+<size=82>Level 1: Introduction & Movement</size>
+
+In the tutorial for this level, you will learn about the basic movement commands for the player.
+
+Please click the next button to continue.
+
+ELEMENT 1:
+-------------
+<size=82>Introduction</size>
+
+First things first, you will need to know what you will be doing in this game. You will play as the small red square, and your objective is to reach the large red tile in each level. You will achieve this by writing Lua code in the dark blue terminal to the right of the screen.
+
+ELEMENT 2:
+-------------
+<size=82>Introduction</size>
+
+Each level you reach will teach you a new concept of programming in Lua, which you will then need to make use of to complete that level.
+When you have written your code, you can test your solution by clicking the 'Run Script' button. If any errors show up in your code, the large orange box will display them.
+
+ELEMENT 3:
+------------
+<size=82>Introduction</size>
+
+The 'Reset' button can be used to cancel the execution of your script early, and move your square back to the starting tile of the level.
+
+Some levels may also contain some starting code for you to get started with, along with various comments containing different hints.
+
+ELEMENT 4:
+------------
+<size=82>Introduction</size>
+
+Finally, if you ever want to re-open these tutorial windows on each level, you can click on the 'i' button to do so.
+
+ELEMENT 5:
+------------
+<size=82>Player Movement</size>
+
+Now that you know the basics of the game, the remainder of this tutorial will teach you how to move your player around each level.
+
+To complete this level, you will need to move the player right two tiles, then down two tiles to reach the red tile.
+
+ELEMENT 6:
+------------
+<size=82>Player Movement</size>
+
+Firstly, your player square can be used in Lua through the 'player' object. This will allow you to call various functions attatched to this object, such as moving. For this level, you will be using MoveRight(), and MoveDown(). Example:
+
+	player.MoveRight()
+	player.MoveDown()
+
+ELEMENT 7:
+------------
+<size=82>Player Movement</size>
+
+Try complete this level by using the MoveRight and MoveLeft functions on the player to move your player square onto the red tile. Remember, you can open these tutorials again by clicking on the 'i' button in the top left corner of the screen!
+
+GOOD LUCK!         <size=32>Click the 'Done' button to close this window.</size>
+
+------------------------------------------------
+LEVEL 2:
+------------------------------------------------
+
+ELEMENT 0:
+------------
+
+
+ELEMENT 1:
+------------
+
+
+ELEMENT 2:
+------------
+
+
+ELEMENT 3:
+------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

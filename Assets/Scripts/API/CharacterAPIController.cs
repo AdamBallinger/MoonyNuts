@@ -53,7 +53,8 @@ namespace Assets.Scripts.API
                 else
                 {
                     // Resume the LUA coroutine if no functions left in the list.
-                    LuaInterpreter.Current.Resume();
+                    if(LuaInterpreter.Current.IsRunning)
+                        LuaInterpreter.Current.Resume();
                 }
             }
         }
