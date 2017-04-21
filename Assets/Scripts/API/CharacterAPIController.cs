@@ -17,9 +17,7 @@ namespace Assets.Scripts.API
     {
 
         public float speed = 1f;
-
         public float stepDistance = 1f;
-
         public float interactLength = 1.0f;
 
         public LayerMask interactMask;
@@ -58,6 +56,18 @@ namespace Assets.Scripts.API
                     LuaInterpreter.Current.Resume();
                 }
             }
+        }
+
+        /// <summary>
+        /// Sets position of the character. Will completely reset functions list, virtual and target position too.
+        /// </summary>
+        /// <param name="_position"></param>
+        public void SetPosition(Vector2 _position)
+        {
+            functions.Clear();
+            transform.position = _position;
+            virtualPosition = _position;
+            targetPosition = _position;
         }
 
         /// <summary>
@@ -184,6 +194,28 @@ namespace Assets.Scripts.API
                 virtualPosition.y -= stepDistance;
                 functions.Add(() => targetPosition.y -= stepDistance);
             }
+        }
+
+        public bool CanMove(string _direction)
+        {
+            var tileOn = World.Current.GetTileAtWorldCoord(virtualPosition);
+
+            switch(_direction.ToLower())
+            {
+                case "left":
+                    return CanMoveInDirection(Direction.Left, tileOn);
+
+                case "right":
+                    return CanMoveInDirection(Direction.Right, tileOn);
+
+                case "up":
+                    return CanMoveInDirection(Direction.Up, tileOn);
+
+                case "down":
+                    return CanMoveInDirection(Direction.Down, tileOn);
+            }
+
+            return false;
         }
 
         private bool CanMoveInDirection(Direction _direction, Tile _originTile)

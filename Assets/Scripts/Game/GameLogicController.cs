@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.API;
+using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
@@ -23,6 +24,7 @@ namespace Assets.Scripts.Game
 
             worldStartTile = World.Current.GetTileAtWorldCoord(worldController.worldStartPosition);
             worldEndTile = World.Current.GetTileAtWorldCoord(worldController.worldEndPosition);
+            player.GetComponent<CharacterAPIController>().SetPosition(new Vector2(worldStartTile.X, worldStartTile.Y));
         }
 
         public void Update()
@@ -33,7 +35,6 @@ namespace Assets.Scripts.Game
             {
                 // TODO: Level complete.
                 Debug.Log("End of level reached!");
-                return;
             }
         }
     }
