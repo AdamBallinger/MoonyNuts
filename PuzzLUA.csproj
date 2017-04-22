@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Game\WorldController.cs" />
     <Compile Include="Assets\Scripts\LuaController.cs" />
     <Compile Include="Assets\Scripts\LuaInterpreter.cs" />
+    <Compile Include="Assets\Scripts\SyntaxHighlighting.cs" />
     <Compile Include="Assets\Scripts\UI\LevelBuilder\LevelBuilderUIController.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\UI\MouseController.cs" />

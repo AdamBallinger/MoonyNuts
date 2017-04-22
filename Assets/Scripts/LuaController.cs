@@ -111,7 +111,7 @@ namespace Assets.Scripts
 
             var lineCount = lines.Where(line => !line.Trim().StartsWith("--")).Count(line => line.Trim().Length > 0);
 
-            Debug.Log("Script is " + lineCount + " lines!");
+            //Debug.Log("Script is " + lineCount + " lines!");
 
             return lineCount <= maxLines;
         }
