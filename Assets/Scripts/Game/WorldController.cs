@@ -9,6 +9,7 @@ namespace Assets.Scripts.Game
     {
 
         public Sprite gridSprite;
+        public Sprite floorSprite;
 
         public Sprite[] startEndSprites;
         public Sprite[] wallSprites;
@@ -66,7 +67,7 @@ namespace Assets.Scripts.Game
             switch (_tileData.Type)
             {
                 case TileType.Empty:
-                    _tileGO.GetComponent<SpriteRenderer>().sprite = SceneManager.GetActiveScene().name == "level_builder" ? gridSprite : null;
+                    _tileGO.GetComponent<SpriteRenderer>().sprite = SceneManager.GetActiveScene().name == "level_builder" ? gridSprite : floorSprite;
                     break;
                 case TileType.Start:
                     _tileGO.GetComponent<SpriteRenderer>().sprite = startEndSprites[0];

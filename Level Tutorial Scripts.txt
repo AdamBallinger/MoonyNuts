@@ -26,6 +26,17 @@ end
 LEVEL 3
 -----------------------------------------------------
 
+while(true) do
+	player.MoveRight()
+	player.MoveRight()
+	player.MoveUp()
+	player.MoveUp()
+	player.MoveRight()
+	player.MoveRight()
+	player.MoveDown()
+	player.MoveDown()
+end
+
 -----------------------------------------------------
 LEVEL TUTORIAL SCRIPTS
 -----------------------------------------------------
@@ -108,7 +119,7 @@ ELEMENT 1:
 ------------
 <size=82>What is an 'IF' statement?</size>
 
-An 'IF' statement is a programming conditional statement that if proven true, will run code found within it. In english, an if statement would read like this:
+An 'IF' statement is a programming conditional statement that if proven true, will run code found within it. In English, an if statement would read like this:
            if 'some condition' is true then
                    run some code here
            end of if statement
@@ -152,10 +163,59 @@ ELEMENT 6:
 Using what you have learnt in this tutorial, move your player square to the red tile. Some code has been provided to get you started.
 
 
+-------------------------------------------------
+LEVEL 3
+-------------------------------------------------
 
+ELEMENT 0:
+------------
+<size=82>Level 3: while loops!</size>
 
+In this tutorial, you will learn about, and use while loops to complete this level.
 
+Please click the next button to continue.
 
+ELEMENT 1:
+------------
+<size=82>What are while loops?</size>
+
+A while loop, similar to if statements are conditional based expression where while the loops condition is evaluated to be true, the code within the loop block will be run over and over.
+
+ELEMENT 2:
+------------
+<size=82>Lua Example:</size>
+
+condition = true
+while(condition == true) do
+	print "I will be printed forever!"
+end
+
+ELEMENT 3:
+------------
+<size=82>Example #2:</size>
+
+while(true) do
+	player.MoveRight()
+end
+
+In this example, the player will move right forever, as the condition will always be true! If you want to exit a loop early, then you can use the 'break' keyword.
+
+ELEMENT 4:
+------------
+<size=82>Break keyword</size>
+
+while(true) do
+	break
+end
+
+This loop will instantly be terminated because of the break keyword, regardless of the condition.
+
+ELEMENT 5:
+------------
+<size=82>Objectives!</size>
+
+Using a while loop, reach the red tile in this level! 
+As an extra challenge, you must complete this level in less than 10 lines of code! Good Luck!
 
 
 
