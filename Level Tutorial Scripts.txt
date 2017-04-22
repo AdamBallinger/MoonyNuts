@@ -38,6 +38,30 @@ while(true) do
 end
 
 -----------------------------------------------------
+LEVEL 4
+-----------------------------------------------------
+
+for i = 0, 4, 1 do
+	player.MoveRight()
+end
+
+for i = 0, 4, 1 do
+	player.MoveDown()
+end
+
+for i = 0, 4, 1 do
+	player.MoveLeft()
+end
+
+for i = 0, 2, 1 do
+	player.MoveUp()
+end
+
+for i = 0, 2, 1 do
+	player.MoveRight()
+end
+
+-----------------------------------------------------
 LEVEL TUTORIAL SCRIPTS
 -----------------------------------------------------
 LEVEL 1
@@ -218,7 +242,49 @@ Using a while loop, reach the red tile in this level!
 As an extra challenge, you must complete this level in less than 10 lines of code! Good Luck!
 
 
+-------------------------------------------------
+LEVEL 4
+-------------------------------------------------
 
+ELEMENT 0:
+------------
+<size=82>Level 4: For loops!</size>
+
+In this tutorial, you will learn about, and use for loops to complete this level.
+
+Please click the next button to continue.
+
+ELEMENT 1:
+------------
+<size=82>What are for loops?</size>
+
+For loops are slightly more complicated than while loops. For loops start with an initial value, a max/min value, followed by the increment for each loop iteration.
+In English: for some start value, some target value, increment value by this much each iteration.
+The next page will show you an example.
+
+ELEMENT 2:
+------------
+<size=82>For loop Example:</size>
+
+for value = 0, 10, 1 do
+	player.MoveRight()
+end
+
+In this example, the player will move right 10 times. The next page will explain in more detail how.
+
+ELEMENT 3:
+------------
+<size=82>Explanation</size>
+
+The variable 'value' is set to 0 to begin with. The second integer (10) is the target value for the variable 'value', and the final value (1) is how much the variable 'value' will increment by each iteration of the loop. This value can also be a negative number(such as -1) if you want to count backwards!
+
+ELEMENT 4:
+------------
+<size=82>Objectives!</size>
+
+Using 5 for loops, complete this level. The first for loop has been provided for you!
+You must also complete this level in no more than 15 lines of code!
+Remember to look back at this tutorial if you get stuck!.
 
 
 
