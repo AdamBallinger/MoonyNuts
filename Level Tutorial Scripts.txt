@@ -68,19 +68,58 @@ LEVEL 2:
 
 ELEMENT 0:
 ------------
+<size=82>Level 2: IF Statements</size>
 
+In this tutorial, you will learn about and use 'IF' statements to complete this level.
+
+Please click the next button to continue.
 
 ELEMENT 1:
 ------------
+<size=82>What is an 'IF' statement?</size>
 
+An 'IF' statement is a programming conditional statement that if proven true, will run code found within it. In english, an if statement would read like this:
+           if 'some condition' is true then
+                   run some code here
+           end of if statement
 
 ELEMENT 2:
 ------------
+<size=82>Lua Example</size>
 
+This is an actual example of an if statement in Lua.
+
+aNumber = 10
+if (aNumber == 10) then
+	print "Condition was true!"
+end
 
 ELEMENT 3:
 ------------
+<size=82>Explanation</size>
 
+In the previous example, a variable, which is basically a way of storing some data, was created and given the value 10 (Using '=' on a variable sets its value). The if statement then checks if the value of the variable is 10 ('==' is the same as saying is equal to). If that condition was true, it runs the code found between the if statement and the 'end' keyword.
+
+ELEMENT 4:
+------------
+<size=82>New Player Function!</size>
+
+In this level, you will need to utilize a new player function. This function is found inside the player object, just like the move functions from the previous level, however, this function requires something called a parameter.
+
+ELEMENT 5:
+------------
+<size=82>Parameters</size>
+
+Parameters are pieces of information you can pass to a function. In this level, you will use the CanMove(string) function (A string is a bunch of characters).
+Example:
+	player.CanMove("left")
+The function will return a true or false value based on if the player is able to move in the given direction.
+
+ELEMENT 6:
+------------
+<size=82>Objectives!</size>
+
+Using what you have learnt in this tutorial, move your player square to the red tile. Some code has been provided to get you started.
 
 
 

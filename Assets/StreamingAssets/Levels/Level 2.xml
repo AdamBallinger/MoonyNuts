@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LevelSaveFile>
-    <LevelData WorldName="Level 1" WorldWidth="16" WorldHeight="16" WorldStartPositionX="5" WorldStartPositionY="9" WorldEndPositionX="5" WorldEndPositionY="7">
+    <LevelData WorldName="Level 1" WorldWidth="16" WorldHeight="16" WorldStartPositionX="5" WorldStartPositionY="9" WorldEndPositionX="9" WorldEndPositionY="7">
         <WorldTiles>
             <Tile TileType="Wall" TileX="0" TileY="0" />
             <Tile TileType="Wall" TileX="0" TileY="1" />
@@ -89,7 +89,7 @@
             <Tile TileType="Wall" TileX="5" TileY="4" />
             <Tile TileType="Wall" TileX="5" TileY="5" />
             <Tile TileType="Wall" TileX="5" TileY="6" />
-            <Tile TileType="End" TileX="5" TileY="7" />
+            <Tile TileType="Wall" TileX="5" TileY="7" />
             <Tile TileType="Wall" TileX="5" TileY="8" />
             <Tile TileType="Start" TileX="5" TileY="9" />
             <Tile TileType="Wall" TileX="5" TileY="10" />
@@ -105,6 +105,7 @@
             <Tile TileType="Wall" TileX="6" TileY="4" />
             <Tile TileType="Wall" TileX="6" TileY="5" />
             <Tile TileType="Wall" TileX="6" TileY="6" />
+            <Tile TileType="Wall" TileX="6" TileY="7" />
             <Tile TileType="Wall" TileX="6" TileY="8" />
             <Tile TileType="Wall" TileX="6" TileY="10" />
             <Tile TileType="Wall" TileX="6" TileY="11" />
@@ -132,7 +133,6 @@
             <Tile TileType="Wall" TileX="8" TileY="4" />
             <Tile TileType="Wall" TileX="8" TileY="5" />
             <Tile TileType="Wall" TileX="8" TileY="6" />
-            <Tile TileType="Wall" TileX="8" TileY="7" />
             <Tile TileType="Wall" TileX="8" TileY="8" />
             <Tile TileType="Wall" TileX="8" TileY="9" />
             <Tile TileType="Wall" TileX="8" TileY="10" />
@@ -148,7 +148,7 @@
             <Tile TileType="Wall" TileX="9" TileY="4" />
             <Tile TileType="Wall" TileX="9" TileY="5" />
             <Tile TileType="Wall" TileX="9" TileY="6" />
-            <Tile TileType="Wall" TileX="9" TileY="7" />
+            <Tile TileType="End" TileX="9" TileY="7" />
             <Tile TileType="Wall" TileX="9" TileY="8" />
             <Tile TileType="Wall" TileX="9" TileY="9" />
             <Tile TileType="Wall" TileX="9" TileY="10" />
@@ -255,5 +255,5 @@
             <Tile TileType="Wall" TileX="15" TileY="15" />
         </WorldTiles>
     </LevelData>
-    <CameraData CameraX="8.935191" CameraY="8.11552" CameraZoom="3.18881" />
+    <CameraData CameraX="9.703979" CameraY="8.173673" CameraZoom="3.18881" />
 </LevelSaveFile>

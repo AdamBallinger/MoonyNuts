@@ -244,5 +244,5 @@
             <Tile TileType="Wall" TileX="15" TileY="15" />
         </WorldTiles>
     </LevelData>
-    <CameraData CameraX="7.240789" CameraY="9.05457" CameraZoom="3.67416" />
+    <CameraData CameraX="8.901805" CameraY="8.657467" CameraZoom="4.357264" />
 </LevelSaveFile>

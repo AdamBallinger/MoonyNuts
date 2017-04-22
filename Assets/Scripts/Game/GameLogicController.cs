@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.API;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Game
 {
@@ -8,6 +9,8 @@ namespace Assets.Scripts.Game
 
         public WorldController worldController;
         public GameObject player;
+
+        public string nextLevel;
 
         private Tile worldStartTile;
         private Tile worldEndTile;
@@ -34,7 +37,7 @@ namespace Assets.Scripts.Game
             if(playerCurrentTile == worldEndTile)
             {
                 // TODO: Level complete.
-                Debug.Log("End of level reached!");
+                SceneManager.LoadScene(nextLevel);
             }
         }
     }
