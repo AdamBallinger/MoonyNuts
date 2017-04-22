@@ -286,6 +286,77 @@ Using 5 for loops, complete this level. The first for loop has been provided for
 You must also complete this level in no more than 15 lines of code!
 Remember to look back at this tutorial if you get stuck!.
 
+-------------------------------------------------
+LEVEL 5
+-------------------------------------------------
+
+ELEMENT 0:
+------------
+<size=82>Level 5: Final Level!</size>
+
+Congratulations on reaching the final level of the game! In this level you will be utilizing everything you have learnt throughout the previous levels to complete the objectives for this level.
+
+Please click the next button to continue.
+
+ELEMENT 1:
+------------
+<size=82>Final Level</size>
+
+This tutorial won't be teaching you anything new. You will use what you have learnt from previous levels instead. The following pages will provide you with examples of everything you have learnt in previous tutorials for you to look back at if you need.
+
+ELEMENT 2:
+------------
+<size=82>IF Statements</size>
+
+if player.CanMove("left") then
+	player.MoveLeft()
+end
+
+Move the player left if it can.
+
+ELEMENT 3:
+------------
+<size=82>While Loops</size>
+
+while(true) do
+	player.MoveRight()
+	player.MoveLeft()
+end
+
+Move the player right then left forever.
+
+ELEMENT 4:
+------------
+<size=82>For Loops</size>
+
+for i = 0, 2, 1 do
+	player.MoveUp()
+end
+
+Move the player up two times.
+
+ELEMENT 5:
+------------
+<size=82>Objectives!</size>
+
+How you complete this level is entirely up to you, and is your chance to test yourself on what you have learnt!
+The only requirement for this level is that you must complete it in under 25 lines of code! 
+
+GOOD LUCK!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
