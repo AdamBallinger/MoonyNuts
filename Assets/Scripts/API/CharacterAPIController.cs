@@ -250,5 +250,10 @@ namespace Assets.Scripts.API
                     return false;
             }
         }
+
+        private void OnDestroy()
+        {
+            CharacterAPI.GetObjects().Remove(gameObject);
+        }
     }
 }
