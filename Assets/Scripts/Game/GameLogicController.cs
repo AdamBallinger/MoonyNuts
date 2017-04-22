@@ -36,7 +36,6 @@ namespace Assets.Scripts.Game
 
             if(playerCurrentTile == worldEndTile)
             {
-                // TODO: Level complete.
                 SceneManager.LoadScene(nextLevel);
             }
         }
